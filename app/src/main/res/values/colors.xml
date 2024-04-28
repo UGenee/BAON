@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="light_green">#00BF63</color>
+    <color name="bg_dashboard">#00ADB5</color>
+    <color name="top_panel">#151B40</color>
+    <color name="bg_firstscreen">#050A30</color>
+    <color name="pin_screen">#050A30</color>
+    <color name="title_app">#FFD700</color>
+    <color name="etr_pin">#393E46</color>
+    <color name="btns">#00ADB5</color>
+</resources>
