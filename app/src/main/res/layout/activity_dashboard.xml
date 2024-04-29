@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="55dp"
+        android:layout_marginStart="55dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="73dp"
-        android:layout_marginLeft="55dp"
+        android:layout_marginStart="55dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="25sp"
@@ -45,8 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="57dp"
-        android:layout_marginLeft="65dp"
-        android:layout_toRightOf="@id/balance"
+        android:layout_marginStart="65dp"
+        android:layout_toEndOf="@id/balance"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="25sp"
@@ -58,7 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="580dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-2dp"
         android:background="@drawable/dash_bg" />
 
     <TextView
@@ -66,8 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="175dp"
-        android:layout_marginLeft="40dp"
-        android:layout_alignParentLeft="true"
+        android:layout_marginStart="40dp"
+        android:layout_alignParentStart="true"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="16sp"
@@ -78,8 +77,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ttl_ex"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="70dp"
         android:textColor="@color/red"
         android:textStyle="bold"
         android:textSize="16sp"
@@ -89,9 +88,9 @@
         android:id="@+id/ttl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="77dp"
+        android:layout_marginEnd="77dp"
         android:layout_marginTop="175dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="16sp"
@@ -102,8 +101,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ttl"
-        android:layout_marginRight="65dp"
-        android:layout_alignParentRight="true"
+        android:layout_marginEnd="65dp"
+        android:layout_alignParentEnd="true"
         android:textColor="@color/light_green"
         android:textStyle="bold"
         android:textSize="16sp"
@@ -150,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Food"
-        android:layout_toRightOf="@id/food"
+        android:layout_toEndOf="@id/food"
         android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
@@ -163,7 +162,7 @@
         android:layout_width="26dp"
         android:layout_height="24dp"
         android:layout_below="@id/txt_food"
-        android:layout_toRightOf="@id/food"
+        android:layout_toEndOf="@id/food"
         android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
         app:srcCompat="@drawable/cash" />
@@ -182,10 +181,10 @@
         android:layout_height="wrap_content"
         android:text="-₱300.00"
         android:textStyle="bold"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/brd_line1"
         android:layout_margin="18dp"
-        android:textSize="15dp"
+        android:textSize="17sp"
         android:textColor="@color/red"/>
 
     <TextView
@@ -194,7 +193,7 @@
         android:layout_height="wrap_content"
         android:text="Cash"
         android:layout_below="@id/txt_food"
-        android:layout_toRightOf="@id/cash"
+        android:layout_toEndOf="@id/cash"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#00ADB5"/>
@@ -233,7 +232,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Miscellaneous"
-        android:layout_toRightOf="@id/misc"
+        android:layout_toEndOf="@id/misc"
         android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
@@ -246,7 +245,7 @@
         android:layout_width="26dp"
         android:layout_height="24dp"
         android:layout_below="@id/txt_misc"
-        android:layout_toRightOf="@id/misc"
+        android:layout_toEndOf="@id/misc"
         android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
         app:srcCompat="@drawable/cash" />
@@ -265,10 +264,10 @@
         android:layout_height="wrap_content"
         android:text="-₱150.00"
         android:textStyle="bold"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/brd_line3"
         android:layout_margin="18dp"
-        android:textSize="15dp"
+        android:textSize="17sp"
         android:textColor="@color/red"/>
 
     <TextView
@@ -277,7 +276,7 @@
         android:layout_height="wrap_content"
         android:text="Cash"
         android:layout_below="@id/txt_misc"
-        android:layout_toRightOf="@id/cash"
+        android:layout_toEndOf="@id/cash"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#00ADB5"/>
@@ -291,40 +290,6 @@
         android:layout_marginStart="10dp"
         app:srcCompat="@drawable/transport" />
 
-    <TextView
-        android:id="@+id/txt_transpo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Transportation"
-        android:layout_toRightOf="@id/transpo"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_below="@id/brd_line4" />
-
-    <ImageView
-        android:id="@+id/cash3"
-        android:layout_width="26dp"
-        android:layout_height="24dp"
-        android:layout_below="@id/txt_transpo"
-        android:layout_toRightOf="@id/misc"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
-        app:srcCompat="@drawable/cash" />
-
-    <TextView
-        android:id="@+id/txt_cash3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cash"
-        android:layout_below="@id/txt_transpo"
-        android:layout_toRightOf="@id/cash"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#00ADB5"/>
-
     <View
         android:id="@+id/brd_line5"
         android:layout_width="394dp"
@@ -333,23 +298,12 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/border_line" />
 
-
-    <ImageView
-        android:id="@+id/cash2"
-        android:layout_width="26dp"
-        android:layout_height="24dp"
-        android:layout_below="@id/txt_misc"
-        android:layout_toRightOf="@id/misc"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
-        app:srcCompat="@drawable/cash" />
-
     <TextView
         android:id="@+id/txt_transpo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Transportation"
-        android:layout_toRightOf="@id/transpo"
+        android:layout_toEndOf="@id/transpo"
         android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
@@ -362,7 +316,7 @@
         android:layout_width="26dp"
         android:layout_height="24dp"
         android:layout_below="@id/txt_transpo"
-        android:layout_toRightOf="@id/misc"
+        android:layout_toEndOf="@id/misc"
         android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
         app:srcCompat="@drawable/cash" />
@@ -373,7 +327,7 @@
         android:layout_height="wrap_content"
         android:text="Cash"
         android:layout_below="@id/txt_transpo"
-        android:layout_toRightOf="@id/cash"
+        android:layout_toEndOf="@id/cash"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#00ADB5"/>
@@ -384,10 +338,10 @@
         android:layout_height="wrap_content"
         android:text="-₱60.00"
         android:textStyle="bold"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/brd_line4"
         android:layout_margin="18dp"
-        android:textSize="15dp"
+        android:textSize="17sp"
         android:textColor="@color/red"/>
 
     <ImageView
@@ -404,7 +358,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Allowance"
-        android:layout_toRightOf="@id/allowance"
+        android:layout_toEndOf="@id/allowance"
         android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
@@ -417,7 +371,7 @@
         android:layout_width="26dp"
         android:layout_height="24dp"
         android:layout_below="@id/txt_allowance"
-        android:layout_toRightOf="@id/allowance"
+        android:layout_toEndOf="@id/allowance"
         android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
         app:srcCompat="@drawable/cash" />
@@ -428,7 +382,7 @@
         android:layout_height="wrap_content"
         android:text="Cash"
         android:layout_below="@id/txt_allowance"
-        android:layout_toRightOf="@id/cash"
+        android:layout_toEndOf="@id/cash"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#00ADB5"/>
@@ -439,14 +393,20 @@
         android:layout_height="wrap_content"
         android:text="+₱2,000.00"
         android:textStyle="bold"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/brd_line5"
         android:layout_margin="18dp"
-        android:textSize="15dp"
+        android:textSize="17sp"
         android:textColor="@color/light_green"/>
 
-
-
+    <ImageView
+        android:id="@+id/btn_add"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/add" />
 
 
 </RelativeLayout>

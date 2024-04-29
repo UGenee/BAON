@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="#050A30"
+    tools:context=".records">
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#050A30"
+        android:drawableLeft="@drawable/cancel"
+        android:text="CANCEL"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#050A30"
+        android:layout_alignParentEnd="true"
+        android:drawableLeft="@drawable/save"
+        android:text="SAVE"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EXPENSE"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:backgroundTint="#050A30"
+        android:layout_below="@id/btn_cancel"
+        android:layout_marginStart="60dp"/>
+
+    <Button
+        android:id="@+id/income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_cancel"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="70dp"
+        android:text="INCOME"
+        android:textSize="20sp"
+        android:backgroundTint="#050A30"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/budget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Budget"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/expense"
+        android:textSize="30sp"/>
+
+    <EditText
+        android:id="@+id/budget_edit"
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/budget"
+        android:textSize="20sp"
+        android:layout_marginStart="30dp"
+        android:inputType="number"/>
+
+    <View
+        android:id="@+id/bg_edit_txt"
+        android:layout_width="94dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="30sp"
+        android:layout_below="@id/budget"
+        android:background="@drawable/bg_edit_text"
+        android:alpha="0.4"/>
+
+
+    <Spinner
+        android:id="@+id/spin_category"
+        android:layout_width="97dp"
+        android:layout_height="43dp"
+        android:layout_below="@id/income"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp" />
+
+    <View
+        android:id="@+id/notes"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_below="@id/budget_edit"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/notes"
+        android:alpha="0.4"/>
+
+    <EditText
+        android:id="@+id/note_edit"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:hint="Add notes"
+        android:layout_below="@id/budget_edit"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:textColorHint="@color/white"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>
