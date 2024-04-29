@@ -1,24 +1,24 @@
 <resources>
     //App name
     <string name="app_name">B.A.O.N</string>
-        //PIN SCREEN STRINGS
-        <string name="etr_pin">Enter your PIN</string>
-        <string name="btn_1">1</string>
-        <string name="btn_2">2</string>
-        <string name="btn_3">3</string>
-        <string name="btn_4">4</string>
-        <string name="btn_5">5</string>
-        <string name="btn_6">6</string>
-        <string name="btn_7">7</string>
-        <string name="btn_8">8</string>
-        <string name="btn_9">9</string>
-        <string name="btn_0">0</string>
-            //Dashboard strings
-            <string name="avail_blc">Available Balance</string>
-            <string name="blnc">₱1,490.00</string>
-            <string name="date">April, 2024</string>
-            <string name="ttl_ex">TOTAL EXPENSE</string>
-            <string name="ttl">TOTAL</string>
-            <string name="expense">₱510.00</string>
-            <string name="total">₱2,000.00</string>
+    //PIN SCREEN STRINGS
+    <string name="etr_pin">Enter your PIN</string>
+    <string name="btn_1">1</string>
+    <string name="btn_2">2</string>
+    <string name="btn_3">3</string>
+    <string name="btn_4">4</string>
+    <string name="btn_5">5</string>
+    <string name="btn_6">6</string>
+    <string name="btn_7">7</string>
+    <string name="btn_8">8</string>
+    <string name="btn_9">9</string>
+    <string name="btn_0">0</string>
+    //Dashboard strings
+    <string name="avail_blc">Available Balance</string>
+    <string name="blnc">₱1,490.00</string>
+    <string name="date">April, 2024</string>
+    <string name="ttl_ex">TOTAL EXPENSE</string>
+    <string name="ttl">TOTAL</string>
+    <string name="expense">₱510.00</string>
+    <string name="total">₱2,000.00</string>
 </resources>

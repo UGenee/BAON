@@ -31,10 +31,10 @@
 
     <EditText
         android:id="@+id/n_pin_pass"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_pin"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="numberPassword"
@@ -54,6 +54,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_1"
         android:textSize="50sp"
+        android:gravity="center"
         android:backgroundTint="@color/btns"/>
 
         <Space
@@ -66,6 +67,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_2"
         android:textSize="50sp"
+        android:gravity="center"
         android:backgroundTint="@color/btns"/>
 
         <Space
@@ -78,6 +80,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_3"
         android:textSize="50sp"
+        android:gravity="center"
         android:backgroundTint="@color/btns"/>
 
     </LinearLayout>
@@ -95,6 +98,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/btns"
         android:text="@string/btn_4"
+        android:gravity="center"
         android:textSize="50sp" />
 
         <Space
@@ -107,6 +111,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_5"
         android:textSize="50sp"
+        android:gravity="center"
         android:backgroundTint="@color/btns"/>
 
         <Space
@@ -119,6 +124,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_6"
         android:textSize="50sp"
+        android:gravity="center"
         android:backgroundTint="@color/btns"/>
 
     </LinearLayout>
@@ -137,6 +143,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/btns"
         android:text="@string/btn_7"
+        android:gravity="center"
         android:textSize="50sp" />
 
         <Space
@@ -149,6 +156,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_8"
         android:textSize="50sp"
+        android:gravity="center"
         android:backgroundTint="@color/btns"/>
 
         <Space
@@ -161,6 +169,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_9"
         android:textSize="50sp"
+        android:gravity="center"
         android:backgroundTint="@color/btns"/>
 
     </LinearLayout>
@@ -179,6 +188,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_0"
         android:textSize="50sp"
+        android:gravity="center"
         android:backgroundTint="@color/btns"/>
 
     </LinearLayout>
