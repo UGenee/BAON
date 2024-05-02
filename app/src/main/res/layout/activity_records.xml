@@ -16,6 +16,7 @@
         android:backgroundTint="#050A30"
         android:drawableLeft="@drawable/cancel"
         android:text="CANCEL"
+        android:textColor="@color/white"
         android:layout_marginTop="15dp"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -28,6 +29,7 @@
         android:layout_alignParentEnd="true"
         android:drawableLeft="@drawable/save"
         android:text="SAVE"
+        android:textColor="@color/white"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:textSize="20sp"
@@ -39,6 +41,7 @@
         android:layout_height="wrap_content"
         android:text="EXPENSE"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:backgroundTint="#050A30"
         android:layout_below="@id/btn_cancel"
@@ -52,6 +55,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="70dp"
         android:text="INCOME"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:backgroundTint="#050A30"
         android:textStyle="bold" />
@@ -74,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/budget"
         android:textSize="20sp"
+        android:textColor="@color/light_green"
         android:layout_marginStart="30dp"
         android:inputType="number"/>
 
@@ -87,14 +92,28 @@
         android:alpha="0.4"/>
 
 
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_alignParentEnd="true"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:layout_below="@id/income"/>
+
     <Spinner
         android:id="@+id/spin_category"
-        android:layout_width="97dp"
+        android:layout_width="wrap_content"
         android:layout_height="43dp"
         android:layout_below="@id/income"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp" />
+        android:layout_marginEnd="25dp" />
 
     <View
         android:id="@+id/notes"
@@ -111,6 +130,7 @@
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:hint="Add notes"
+        android:textColor="@color/white"
         android:layout_below="@id/budget_edit"
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
