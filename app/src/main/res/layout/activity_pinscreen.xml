@@ -36,8 +36,9 @@
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:textSize="20sp"
-        android:ems="5"
+        android:ems="4"
         android:textStyle="bold"
         android:inputType="numberPassword"
         android:backgroundTint="@color/white"/>
@@ -176,7 +177,7 @@
         android:gravity="center" >
 
     <ImageView
-        android:id="@+id/btn_erase"
+        android:id="@+id/btn_enter"
         android:layout_width="80dp"
         android:layout_height="84dp"
         app:srcCompat="@drawable/btn_check" />
@@ -198,7 +199,7 @@
             android:layout_height="match_parent"/>
 
     <ImageView
-        android:id="@+id/btn_enter"
+        android:id="@+id/btn_erase"
         android:layout_width="80dp"
         android:layout_height="84dp"
         app:srcCompat="@drawable/btn_erase" />
