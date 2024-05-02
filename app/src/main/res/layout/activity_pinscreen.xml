@@ -30,15 +30,11 @@
 
     <EditText
         android:id="@+id/n_pin_pass"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_pin"
-<<<<<<< HEAD
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
-=======
-        android:layout_marginTop="35dp"
->>>>>>> 016fdd68123f22807b34edc8a74ab06a44fad7f9
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:ems="5"
@@ -60,12 +56,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_1"
         android:textSize="50sp"
-<<<<<<< HEAD
         android:background="?android:attr/selectableItemBackground"/>
-=======
-        android:gravity="center"
-        android:backgroundTint="@color/btns"/>
->>>>>>> 016fdd68123f22807b34edc8a74ab06a44fad7f9
 
         <Space
             android:layout_width="30dp"
@@ -77,12 +68,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_2"
         android:textSize="50sp"
-<<<<<<< HEAD
         android:background="?android:attr/selectableItemBackground"/>
-=======
-        android:gravity="center"
-        android:backgroundTint="@color/btns"/>
->>>>>>> 016fdd68123f22807b34edc8a74ab06a44fad7f9
 
         <Space
             android:layout_width="30dp"
@@ -94,12 +80,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_3"
         android:textSize="50sp"
-<<<<<<< HEAD
         android:background="?android:attr/selectableItemBackground"/>
-=======
-        android:gravity="center"
-        android:backgroundTint="@color/btns"/>
->>>>>>> 016fdd68123f22807b34edc8a74ab06a44fad7f9
 
     </LinearLayout>
 
@@ -116,7 +97,6 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
         android:text="@string/btn_4"
-        android:gravity="center"
         android:textSize="50sp" />
 
         <Space
@@ -129,12 +109,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_5"
         android:textSize="50sp"
-<<<<<<< HEAD
         android:background="?android:attr/selectableItemBackground"/>
-=======
-        android:gravity="center"
-        android:backgroundTint="@color/btns"/>
->>>>>>> 016fdd68123f22807b34edc8a74ab06a44fad7f9
 
         <Space
             android:layout_width="30dp"
@@ -146,12 +121,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_6"
         android:textSize="50sp"
-<<<<<<< HEAD
         android:background="?android:attr/selectableItemBackground"/>
-=======
-        android:gravity="center"
-        android:backgroundTint="@color/btns"/>
->>>>>>> 016fdd68123f22807b34edc8a74ab06a44fad7f9
 
     </LinearLayout>
 
@@ -169,7 +139,6 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
         android:text="@string/btn_7"
-        android:gravity="center"
         android:textSize="50sp" />
 
         <Space
@@ -182,12 +151,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_8"
         android:textSize="50sp"
-<<<<<<< HEAD
         android:background="?android:attr/selectableItemBackground"/>
-=======
-        android:gravity="center"
-        android:backgroundTint="@color/btns"/>
->>>>>>> 016fdd68123f22807b34edc8a74ab06a44fad7f9
 
         <Space
             android:layout_width="30dp"
@@ -199,12 +163,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_9"
         android:textSize="50sp"
-<<<<<<< HEAD
         android:background="?android:attr/selectableItemBackground"/>
-=======
-        android:gravity="center"
-        android:backgroundTint="@color/btns"/>
->>>>>>> 016fdd68123f22807b34edc8a74ab06a44fad7f9
 
     </LinearLayout>
 
@@ -232,7 +191,6 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_0"
         android:textSize="50sp"
-<<<<<<< HEAD
         android:background="?android:attr/selectableItemBackground"/>
 
         <Space
@@ -245,10 +203,6 @@
         android:layout_height="84dp"
         app:srcCompat="@drawable/btn_erase" />
 
-=======
-        android:gravity="center"
-        android:backgroundTint="@color/btns"/>
->>>>>>> 016fdd68123f22807b34edc8a74ab06a44fad7f9
 
     </LinearLayout>
 
