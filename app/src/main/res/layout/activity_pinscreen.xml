@@ -191,6 +191,32 @@
         android:gravity="center"
         android:backgroundTint="@color/btns"/>
 
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/btn_erase"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_0"
+            android:textSize="50sp"
+            android:gravity="center"
+            android:backgroundTint="@color/btns"/>
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/btn_enter"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_0"
+            android:textSize="50sp"
+            android:gravity="center"
+            android:backgroundTint="@color/btns"/>
+
     </LinearLayout>
 
 
