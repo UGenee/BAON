@@ -37,8 +37,7 @@
         android:layout_marginStart="55dp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="25sp"
-        android:text="@string/blnc"/>
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/date"
@@ -46,7 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="57dp"
         android:layout_marginStart="65dp"
-        android:layout_toEndOf="@id/balance"
+        android:layout_marginEnd="30dp"
+        android:layout_alignParentEnd="true"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="25sp"
@@ -81,8 +81,7 @@
         android:layout_marginStart="70dp"
         android:textColor="@color/red"
         android:textStyle="bold"
-        android:textSize="16sp"
-        android:text="@string/expense"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/ttl"
@@ -105,8 +104,7 @@
         android:layout_alignParentEnd="true"
         android:textColor="@color/light_green"
         android:textStyle="bold"
-        android:textSize="16sp"
-        android:text="@string/total"/>
+        android:textSize="16sp" />
 
     <View
         android:id="@+id/dash_line"
@@ -115,289 +113,6 @@
         android:layout_marginTop="230dp"
         android:background="@drawable/dash_line"/>
 
-    <TextView
-        android:id="@+id/day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Apr 10, Monday"
-        android:layout_below="@id/dash_line"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="15sp"/>
-
-    <View
-        android:id="@+id/brd_line1"
-        android:layout_width="394dp"
-        android:layout_height="2dp"
-        android:layout_below="@id/day"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/border_line"/>
-
-    <ImageView
-        android:id="@+id/food"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/brd_line1"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        app:srcCompat="@drawable/food" />
-
-    <TextView
-        android:id="@+id/txt_food"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Food"
-        android:layout_toEndOf="@id/food"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_below="@id/brd_line1" />
-
-    <ImageView
-        android:id="@+id/cash"
-        android:layout_width="26dp"
-        android:layout_height="24dp"
-        android:layout_below="@id/txt_food"
-        android:layout_toEndOf="@id/food"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
-        app:srcCompat="@drawable/cash" />
-
-    <View
-        android:id="@+id/brd_line2"
-        android:layout_width="394dp"
-        android:layout_height="2dp"
-        android:layout_below="@id/cash"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/border_line"/>
-
-    <TextView
-        android:id="@+id/food_exp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-₱300.00"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/brd_line1"
-        android:layout_margin="18dp"
-        android:textSize="17sp"
-        android:textColor="@color/red"/>
-
-    <TextView
-        android:id="@+id/txt_cash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cash"
-        android:layout_below="@id/txt_food"
-        android:layout_toEndOf="@id/cash"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#00ADB5"/>
-
-    <TextView
-        android:id="@+id/txt_apr5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Apr 5, Friday"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/brd_line2"/>
-
-    <ImageView
-        android:id="@+id/misc"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/txt_apr5"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        app:srcCompat="@drawable/misc" />
-
-    <View
-        android:id="@+id/brd_line3"
-        android:layout_width="394dp"
-        android:layout_height="2dp"
-        android:layout_below="@id/txt_apr5"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/border_line"/>
-
-    <TextView
-        android:id="@+id/txt_misc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Miscellaneous"
-        android:layout_toEndOf="@id/misc"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_below="@id/brd_line3" />
-
-    <ImageView
-        android:id="@+id/cash2"
-        android:layout_width="26dp"
-        android:layout_height="24dp"
-        android:layout_below="@id/txt_misc"
-        android:layout_toEndOf="@id/misc"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
-        app:srcCompat="@drawable/cash" />
-
-    <View
-        android:id="@+id/brd_line4"
-        android:layout_width="394dp"
-        android:layout_height="2dp"
-        android:layout_below="@id/cash2"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/border_line"/>
-
-    <TextView
-        android:id="@+id/misc_exp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-₱150.00"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/brd_line3"
-        android:layout_margin="18dp"
-        android:textSize="17sp"
-        android:textColor="@color/red"/>
-
-    <TextView
-        android:id="@+id/txt_cash2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cash"
-        android:layout_below="@id/txt_misc"
-        android:layout_toEndOf="@id/cash"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#00ADB5"/>
-
-    <ImageView
-        android:id="@+id/transpo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/brd_line4"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        app:srcCompat="@drawable/transport" />
-
-    <View
-        android:id="@+id/brd_line5"
-        android:layout_width="394dp"
-        android:layout_height="2dp"
-        android:layout_below="@id/cash3"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/border_line" />
-
-    <TextView
-        android:id="@+id/txt_transpo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Transportation"
-        android:layout_toEndOf="@id/transpo"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_below="@id/brd_line4" />
-
-    <ImageView
-        android:id="@+id/cash3"
-        android:layout_width="26dp"
-        android:layout_height="24dp"
-        android:layout_below="@id/txt_transpo"
-        android:layout_toEndOf="@id/misc"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
-        app:srcCompat="@drawable/cash" />
-
-    <TextView
-        android:id="@+id/txt_cash3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cash"
-        android:layout_below="@id/txt_transpo"
-        android:layout_toEndOf="@id/cash"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#00ADB5"/>
-
-    <TextView
-        android:id="@+id/transpo_exp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-₱60.00"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/brd_line4"
-        android:layout_margin="18dp"
-        android:textSize="17sp"
-        android:textColor="@color/red"/>
-
-    <ImageView
-        android:id="@+id/allowance"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/brd_line5"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        app:srcCompat="@drawable/allowance" />
-
-    <TextView
-        android:id="@+id/txt_allowance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Allowance"
-        android:layout_toEndOf="@id/allowance"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_below="@id/brd_line5" />
-
-    <ImageView
-        android:id="@+id/cash4"
-        android:layout_width="26dp"
-        android:layout_height="24dp"
-        android:layout_below="@id/txt_allowance"
-        android:layout_toEndOf="@id/allowance"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
-        app:srcCompat="@drawable/cash" />
-
-    <TextView
-        android:id="@+id/txt_cash4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cash"
-        android:layout_below="@id/txt_allowance"
-        android:layout_toEndOf="@id/cash"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#00ADB5"/>
-
-    <TextView
-        android:id="@+id/allowance_inc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+₱2,000.00"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/brd_line5"
-        android:layout_margin="18dp"
-        android:textSize="17sp"
-        android:textColor="@color/light_green"/>
 
     <ImageView
         android:id="@+id/btn_add"
@@ -406,7 +121,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/add"
+        android:onClick="add_record"/>
 
 
 </RelativeLayout>
