@@ -121,7 +121,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/add" /
+        app:srcCompat="@drawable/add"
+        android:onClick="add_record" />
 
 
 </RelativeLayout>
