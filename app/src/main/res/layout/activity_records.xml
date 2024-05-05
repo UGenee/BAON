@@ -92,28 +92,15 @@
         android:alpha="0.4"/>
 
 
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:layout_alignParentEnd="true"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
-        android:layout_below="@id/income"/>
-
     <Spinner
         android:id="@+id/spin_category"
-        android:layout_width="wrap_content"
+        android:layout_width="151dp"
         android:layout_height="43dp"
         android:layout_below="@id/income"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="60dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp" />
+        android:layout_marginEnd="23dp" />
 
     <View
         android:id="@+id/notes"
