@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,11 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class dashboard extends AppCompatActivity {
 
-    private android.widget.ImageButton ImageButton;
+    private android.widget.ImageView ImageView;
     private android.widget.TextView TextView;
     TextView balanceTextView = (TextView);
 
-    ImageButton imgAdd = (ImageButton);
+    ImageView btnAdd = (ImageView);
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,8 @@ public class dashboard extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dashboard);
 
-        imgAdd = findViewById(R.id.btn_add);
+        //Add_Button
+
 
         balanceTextView = findViewById(R.id.balance);
 
@@ -35,11 +37,14 @@ public class dashboard extends AppCompatActivity {
         balanceTextView.setText(budgetInput);
 
 
-
+        btnAdd = findViewById(R.id.btn_add);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(dashboard.this, records.class));
+            }
+        });
     }
 
-    public void Add(View view) {
-
-    }
 
 }

@@ -45,7 +45,7 @@
         android:textSize="20sp"
         android:backgroundTint="#050A30"
         android:layout_below="@id/btn_cancel"
-        android:layout_marginStart="60dp"/>
+        android:layout_marginStart="60dp" />
 
     <Button
         android:id="@+id/income"
@@ -114,14 +114,14 @@
 
     <EditText
         android:id="@+id/note_edit"
-        android:layout_width="330dp"
-        android:layout_height="wrap_content"
-        android:hint="Add notes"
-        android:textColor="@color/white"
+        android:layout_width="345dp"
+        android:layout_height="302dp"
         android:layout_below="@id/budget_edit"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
+        android:hint="Add notes"
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textStyle="bold" />
 

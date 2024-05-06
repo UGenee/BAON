@@ -23,7 +23,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     private android.widget.EditText EditText;
     private android.widget.Spinner Spinner;
     EditText budget, notes = (EditText);
-    Button btnCancel, btnSave = (Button);
+    Button btnCancel, btnSave, btnExpense, btnIncome = (Button);
     SQLiteDatabase db = (SQLiteDatabase);
     Spinner spinner = (Spinner);
 
@@ -36,10 +36,9 @@ public class records extends AppCompatActivity implements View.OnClickListener {
 
         //Spinner
         spinner = findViewById(R.id.spin_category);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.income_categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
 
 
         budget = findViewById(R.id.budget_edit);
@@ -49,23 +48,38 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             btnCancel.setOnClickListener(this);
         btnSave = findViewById(R.id.btn_save);
             btnSave.setOnClickListener(this);
+        btnExpense = findViewById(R.id.expense);
+            btnExpense.setOnClickListener(this);
+        btnIncome = findViewById(R.id.income);
+            btnIncome.setOnClickListener(this);
 
-
-            db = openOrCreateDatabase ("recordDB", Context.MODE_PRIVATE, null);
-            db.execSQL("CREATE TABLE IF NOT EXISTS record (budget_input VARCHAR, note_input VARCHAR);");
+        db = openOrCreateDatabase("recordDB", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS record (budget_input VARCHAR, note_input VARCHAR);");
 
 
     }
-        @Override
+
+    @Override
         public void onClick(View view) {
             if (view == btnCancel) {
                 finish();
-                Toast.makeText(records.this, "Canceled.", Toast.LENGTH_SHORT).show();
             } else if (view == btnSave) {
-
+                startActivity(new Intent(records.this, dashboard.class));
+            } else if (view == btnIncome) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.income_categories, android.R.layout.simple_spinner_item);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
+            } else if (view == btnExpense) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.expense_categories, android.R.layout.simple_spinner_item);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
             }
 
     }
+
+
+
+
 
 }
 
