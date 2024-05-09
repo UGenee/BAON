@@ -28,6 +28,8 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     Spinner spinner = (Spinner);
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,14 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             if (view == btnCancel) {
                 finish();
             } else if (view == btnSave) {
-                startActivity(new Intent(records.this, dashboard.class));
+                String budgetInput = budget.getText().toString();
+                String noteInput = notes.getText().toString();
+
+                if (budgetInput.isEmpty()) {
+                    Toast.makeText(this, "Please put a budget.", Toast.LENGTH_SHORT).show();
+                } else {
+                    startActivity(new Intent(records.this, dashboard.class));
+                }
             } else if (view == btnIncome) {
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.income_categories, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

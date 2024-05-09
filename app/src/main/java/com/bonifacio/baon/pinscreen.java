@@ -7,21 +7,25 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class pinscreen extends AppCompatActivity implements View.OnClickListener{
-
+    private android.widget.ImageView ImageView;
+    android.widget.ImageView btn_etr = (ImageView);
     private EditText pinEditText;
     private String inputPin = "";
 
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_pinscreen);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pinscreen);
 
-            pinEditText = findViewById(R.id.n_pin_pass);
+        pinEditText = findViewById(R.id.n_pin_pass);
+        btn_etr = findViewById(R.id.btn_enter);
+        btn_etr.setOnClickListener(this);
 
             setNumberButtonClickListener((Button) findViewById(R.id.btn_1), "1");
             setNumberButtonClickListener((Button) findViewById(R.id.btn_2), "2");
@@ -56,7 +60,7 @@ public class pinscreen extends AppCompatActivity implements View.OnClickListener
             });
 
             findViewById(R.id.btn_erase).setOnClickListener(view -> {
-                if (!inputPin.isEmpty()) {
+                if (inputPin.length() > 0) {
                     inputPin = inputPin.substring(0, inputPin.length() - 1);
                     pinEditText.setText(inputPin);
                     pinEditText.setSelection(inputPin.length());
@@ -76,10 +80,11 @@ public class pinscreen extends AppCompatActivity implements View.OnClickListener
     }
     @Override
     public void onClick(View v) {
-            if (inputPin.isEmpty()) {
+            if (inputPin.equals("1234")) {
             startActivity(new Intent(pinscreen.this, dashboard.class));
         } else {
             Toast.makeText(this, "Incorrect Pin!", Toast.LENGTH_SHORT).show();
+            pinEditText.setText("");
         }
 
     }
