@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".dashboard">
+    tools:context=".dashboard" >
 
     <View
         android:id="@+id/bg_dash"
@@ -18,14 +18,14 @@
     <View
         android:id="@+id/bg"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@color/bg_dashboard"/>
+        android:layout_height="169dp"
+        android:background="@color/bg_dashboard" />
 
     <View
         android:id="@+id/top_panel"
         android:layout_width="350dp"
         android:layout_height="100dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/dash_panel"/>
 
@@ -33,7 +33,7 @@
         android:id="@+id/avail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="65dp"
         android:layout_marginStart="55dp"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -44,8 +44,8 @@
         android:id="@+id/balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="73dp"
         android:layout_marginStart="55dp"
+        android:layout_below="@id/avail"
         android:textColor="@color/white"
         android:text="balance"
         android:textStyle="bold"
@@ -57,7 +57,7 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="79dp"
         android:layout_marginStart="65dp"
         android:layout_marginEnd="30dp"
         android:layout_alignParentEnd="true"
@@ -73,7 +73,7 @@
         android:id="@+id/ttl_ex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="190dp"
         android:layout_marginStart="40dp"
         android:layout_alignParentStart="true"
         android:textColor="@color/white"
@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="77dp"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="190dp"
         android:layout_alignParentEnd="true"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -119,21 +119,30 @@
         android:id="@+id/dash_line"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/dash_line"/>
 
 
-    <ImageView
-        android:id="@+id/btn_add"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
+
+    <ListView
+        android:id="@+id/list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/dash_line" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="50dp"
-        app:srcCompat="@drawable/add"
-        android:background="@drawable/circle_add"
-        android:onClick="Add" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="80dp"
+        android:tint="@color/white"
+        app:backgroundTint="@color/teal_200"
+        app:rippleColor="@color/teal_700"
+        android:src="@drawable/add" />
+
 
 
 </RelativeLayout>

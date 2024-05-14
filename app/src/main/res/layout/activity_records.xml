@@ -126,5 +126,12 @@
         android:textColorHint="@color/white"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:layout_below="@id/note_edit"/>
+
 
 </RelativeLayout>

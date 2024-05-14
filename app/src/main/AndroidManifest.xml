@@ -31,7 +31,7 @@
             android:name=".MainActivity"
             android:exported="true"/>
         <activity
-            android:name=".SetupPinActivity"
+            android:name=".PinScreenActivity"
             android:exported="true"/>
         <activity
             android:name=".firstscreen"

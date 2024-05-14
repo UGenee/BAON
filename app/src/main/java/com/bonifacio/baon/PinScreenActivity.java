@@ -22,7 +22,7 @@ public class PinScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pinscreen);
+        setContentView(R.layout.activity_setpinscreen);
 
         pinEditText = findViewById(R.id.n_pin_pass);
         numberButtons = new Button[] {
@@ -67,7 +67,7 @@ public class PinScreenActivity extends AppCompatActivity {
                 String pin = pinEditText.getText().toString();
                 if (isValidPin(pin)) {
                     // Navigate to next activity
-                    Intent intent = new Intent(PinScreenActivity.this, DashboardActivity.class);
+                    Intent intent = new Intent(PinScreenActivity.this, dashboard.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PinScreenActivity.this, "Invalid PIN", Toast.LENGTH_SHORT).show();
