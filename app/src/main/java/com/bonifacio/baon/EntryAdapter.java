@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
+
     Context context;
 
     public static final int WRAP_CONTENT_LENGTH = 50;
@@ -29,16 +30,16 @@ public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
 
         if(note != null) {
             TextView title = (TextView) convertView.findViewById( R.id.list_note_title);
-            TextView date = (TextView) convertView.findViewById( R.id.list_note_date);
-            TextView content = (TextView) convertView.findViewById( R.id.list_note_content_preview);
+            TextView date = (TextView) convertView.findViewById( R.id.list_date);
+            TextView content = (TextView) convertView.findViewById( R.id.list_category);
 
             title.setText(note.getEntryTitle()); date.setText(note.getDateTimeFormatted(context) + "");
 
-//correctly show preview of the content
-// (not more than 50 char or more than one line!)
+        //correctly show preview of the content
+        // (not more than 50 char or more than one line!)
             int toWrap = WRAP_CONTENT_LENGTH;
             int lineBreakIndex = note.getContent().indexOf('\n');
-// used to wrap/cut the content
+        // used to wrap/cut the content
             if(note.getContent().length() > WRAP_CONTENT_LENGTH || lineBreakIndex < WRAP_CONTENT_LENGTH) {
                 if(lineBreakIndex < WRAP_CONTENT_LENGTH) { toWrap = lineBreakIndex;
                 }

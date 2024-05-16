@@ -2,44 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/item_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/add"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="16dp"/>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_gravity="center"
+            android:id="@+id/list_note_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="Large Text"
-            android:id="@+id/list_note_title"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_alignTop="@+id/list_note_date"
-            android:layout_toEndOf="@+id/list_note_content_preview" />
+            android:textColor="@color/black"
+            android:text="Title"/>
+
         <TextView
-            android:paddingLeft="100dp"
+            android:paddingRight="20dp"
             android:layout_gravity="center|end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:text="Medium Text"
-            android:id="@+id/list_note_content_preview"
-            android:visibility="gone"/>
-
-        <TextView
-            android:paddingRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="Medium Text"
-            android:id="@+id/list_note_date"
+            android:id="@+id/list_date"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:textStyle="italic"/>
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/list_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_note_title"
+            android:textSize="14sp"
+            android:textColor="@color/red"
+            android:text="Subtitle"/>
 
     </RelativeLayout>
+
 </LinearLayout>
