@@ -12,7 +12,7 @@
         android:id="@+id/app_logo"
         android:layout_width="wrap_content"
         android:layout_height="459dp"
-        android:src="@drawable/baon"/>
+        android:src="@drawable/applogo"/>
 
     <TextView
         android:id="@+id/txt_app"
