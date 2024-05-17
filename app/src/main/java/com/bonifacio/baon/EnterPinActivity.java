@@ -21,7 +21,7 @@ public class EnterPinActivity extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
-                setContentView(R.layout.activity_pinscreen);
+                setContentView(R.layout.activity_setpinscreen);
 
                 pinInput = findViewById(R.id.n_pin_pass);
                 btnEnter = findViewById(R.id.btn_enter);

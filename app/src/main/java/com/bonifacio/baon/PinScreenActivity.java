@@ -12,17 +12,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class PinScreenActivity extends AppCompatActivity {
 
+    private static final String TAG = "PinScreenActivity";
+    private static final int PIN_LENGTH = 4;
+
     private EditText pinEditText;
     private Button[] numberButtons;
     private ImageView enterButton;
     private ImageView eraseButton;
-
-    private static final int PIN_LENGTH = 4;
+    private String verifiedPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setpinscreen);
+        setContentView(R.layout.activity_pinscreen);
 
         pinEditText = findViewById(R.id.n_pin_pass);
         numberButtons = new Button[] {
@@ -40,12 +42,21 @@ public class PinScreenActivity extends AppCompatActivity {
         enterButton = findViewById(R.id.btn_enter);
         eraseButton = findViewById(R.id.btn_erase);
 
-        setNumberButtonListeners();
-        setEnterButtonListener();
-        setEraseButtonListener();
+        // Retrieve verified PIN from intent
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("verified_pin")) {
+            verifiedPin = intent.getStringExtra("verified_pin");
+        } else {
+            finish();
+            return;
+        }
+
+        setupNumberButtonListeners();
+        setupEnterButtonListener();
+        setupEraseButtonListener();
     }
 
-    private void setNumberButtonListeners() {
+    private void setupNumberButtonListeners() {
         for (Button button : numberButtons) {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,23 +71,27 @@ public class PinScreenActivity extends AppCompatActivity {
         }
     }
 
-    private void setEnterButtonListener() {
+    private void setupEnterButtonListener() {
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String pin = pinEditText.getText().toString();
                 if (isValidPin(pin)) {
-                    // Navigate to next activity
-                    Intent intent = new Intent(PinScreenActivity.this, dashboard.class);
-                    startActivity(intent);
+                    if (pin.equals(verifiedPin)) {
+                        // Navigate to next activity
+                        Intent intent = new Intent(PinScreenActivity.this, dashboard.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(PinScreenActivity.this, "Invalid PIN", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(PinScreenActivity.this, "Invalid PIN", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PinScreenActivity.this, "PIN must be " + PIN_LENGTH + " digits", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void setEraseButtonListener() {
+    private void setupEraseButtonListener() {
         eraseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -12,31 +12,13 @@
 
 
 
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Welcome User!"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/white" />
-
-    <View
-        android:id="@+id/pin_board"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="65dp"
-        android:layout_centerHorizontal="true" />
-
-
     <ImageView
-        android:layout_width="361dp"
-        android:layout_height="118dp"
+        android:id="@+id/lock_img"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="30dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        android:layout_below="@id/welcome"
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/lock" />
 
@@ -44,12 +26,12 @@
         android:id="@+id/enter_pin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/lock_img"
         android:layout_centerHorizontal="true"
-        android:text="Confirm your Pin"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        android:layout_marginTop="173dp"
-        android:textColor="@color/white" />
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/n_pin_pass"
@@ -70,16 +52,16 @@
         android:id="@+id/btns_row1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pin_board"
+        android:layout_below="@id/n_pin_pass"
         android:layout_marginTop="35dp"
         android:gravity="center">
 
         <Button
             android:id="@+id/btn_1"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:text="@string/btn_1"
-            android:textSize="50sp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:background="?android:attr/selectableItemBackground"/>
 
@@ -90,10 +72,10 @@
         <Button
             android:id="@+id/btn_2"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_height="80dp"
             android:text="@string/btn_2"
-            android:textSize="50sp"
+            android:textSize="30sp"
+            android:textColor="@color/white"
             android:background="?android:attr/selectableItemBackground"/>
 
         <Space
@@ -103,10 +85,10 @@
         <Button
             android:id="@+id/btn_3"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_height="80dp"
             android:text="@string/btn_3"
-            android:textSize="50sp"
+            android:textSize="30sp"
+            android:textColor="@color/white"
             android:background="?android:attr/selectableItemBackground"/>
 
     </LinearLayout>
@@ -118,14 +100,15 @@
         android:layout_below="@id/btns_row1"
         android:layout_marginTop="30dp"
         android:gravity="center" >
+
         <Button
             android:id="@+id/btn_4"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_height="80dp"
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/btn_4"
-            android:textSize="50sp" />
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <Space
             android:layout_width="30dp"
@@ -134,10 +117,10 @@
         <Button
             android:id="@+id/btn_5"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:text="@string/btn_5"
-            android:textSize="50sp"
             android:textColor="@color/white"
+            android:textSize="30sp"
             android:background="?android:attr/selectableItemBackground"/>
 
         <Space
@@ -147,10 +130,10 @@
         <Button
             android:id="@+id/btn_6"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_height="80dp"
             android:text="@string/btn_6"
-            android:textSize="50sp"
+            android:textColor="@color/white"
+            android:textSize="30sp"
             android:background="?android:attr/selectableItemBackground"/>
 
     </LinearLayout>
@@ -166,11 +149,11 @@
         <Button
             android:id="@+id/btn_7"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:textColor="@color/white"
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/btn_7"
-            android:textSize="50sp" />
+            android:textSize="30sp" />
 
         <Space
             android:layout_width="30dp"
@@ -179,10 +162,10 @@
         <Button
             android:id="@+id/btn_8"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_height="80dp"
             android:text="@string/btn_8"
-            android:textSize="50sp"
+            android:textColor="@color/white"
+            android:textSize="30sp"
             android:background="?android:attr/selectableItemBackground"/>
 
         <Space
@@ -192,9 +175,9 @@
         <Button
             android:id="@+id/btn_9"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:text="@string/btn_9"
-            android:textSize="50sp"
+            android:textSize="30sp"
             android:textColor="@color/white"
             android:background="?android:attr/selectableItemBackground"/>
 
@@ -211,7 +194,7 @@
         <ImageView
             android:id="@+id/btn_enter"
             android:layout_width="80dp"
-            android:layout_height="84dp"
+            android:layout_height="80dp"
             app:srcCompat="@drawable/btn_check" />
 
         <Space
@@ -221,10 +204,10 @@
         <Button
             android:id="@+id/btn_0"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_height="80dp"
             android:text="@string/btn_0"
-            android:textSize="50sp"
+            android:textColor="@color/white"
+            android:textSize="30sp"
             android:background="?android:attr/selectableItemBackground"/>
 
         <Space
@@ -234,7 +217,7 @@
         <ImageView
             android:id="@+id/btn_erase"
             android:layout_width="80dp"
-            android:layout_height="84dp"
+            android:layout_height="80dp"
             app:srcCompat="@drawable/btn_erase" />
 
     </LinearLayout>
