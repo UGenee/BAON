@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_firstscreen"
-    tools:context=".firstscreen">
+    tools:context=".firstscreen"
+    app:layoutDescription="@xml/activity_firstscreen_scene">
 
     <ImageView
-        android:id="@+id/app_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="459dp"
-        android:src="@drawable/applogo"/>
+        android:id="@+id/imgview"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/applogo" />
 
-    <TextView
-        android:id="@+id/txt_app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/app_logo"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/norwester"
-        android:text="@string/app_name"
-        android:textColor="@color/title_app"
-        android:textSize="90sp" />
-</RelativeLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

@@ -14,12 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ConfirmPinActivity extends AppCompatActivity {
 
-    private static final String TAG = "ConfirmPinActivity";
     private static final int PIN_LENGTH = 4;
-
     private EditText pinInput;
     private String savedPin;
-
     private ImageView confirmButton, eraseButton;
 
     @Override
@@ -27,14 +24,12 @@ public class ConfirmPinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirm_pin_activity);
 
-        // Load saved PIN from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         savedPin = sharedPreferences.getString("pin", "");
 
         pinInput = findViewById(R.id.n_pin_pass);
-        pinInput.setFilters(new InputFilter[] {new InputFilter.LengthFilter(PIN_LENGTH)}); // Limit input to 4 characters
+        pinInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(PIN_LENGTH)});
 
-        // Initialize number buttons
         View btn0 = findViewById(R.id.btn_0);
         View btn1 = findViewById(R.id.btn_1);
         View btn2 = findViewById(R.id.btn_2);
@@ -46,38 +41,20 @@ public class ConfirmPinActivity extends AppCompatActivity {
         View btn8 = findViewById(R.id.btn_8);
         View btn9 = findViewById(R.id.btn_9);
 
-        // Set up number button click listeners
-        View[] numberButtons = new View[] {btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
+        View[] numberButtons = new View[]{btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
         setupNumberButtonListeners(numberButtons);
 
         confirmButton = findViewById(R.id.btn_enter);
         eraseButton = findViewById(R.id.btn_erase);
 
-        // Set up button click listeners
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkPinValidity();
-            }
-        });
-
-        eraseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pinInput.setText("");
-            }
-        });
+        confirmButton.setOnClickListener(v -> checkPinValidity());
+        eraseButton.setOnClickListener(v -> pinInput.setText(""));
     }
 
     private void setupNumberButtonListeners(View[] numberButtons) {
         for (int i = 0; i < numberButtons.length; i++) {
             final int digit = i;
-            numberButtons[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    appendDigitToPin(digit);
-                }
-            });
+            numberButtons[i].setOnClickListener(v -> appendDigitToPin(digit));
         }
     }
 
@@ -91,18 +68,26 @@ public class ConfirmPinActivity extends AppCompatActivity {
     private void checkPinValidity() {
         String inputPin = pinInput.getText().toString();
         if (verifyPin(inputPin)) {
-            // Pin is correct, perform necessary actions
-            Intent intent = new Intent(ConfirmPinActivity.this, PinScreenActivity.class);
-            intent.putExtra("verified_pin", inputPin);
-            startActivity(intent);
+            navigateToPinScreenActivity();
         } else {
-            // Pin is incorrect, show error message or perform necessary actions
             Toast.makeText(this, "Pin is incorrect", Toast.LENGTH_SHORT).show();
         }
     }
 
     private boolean verifyPin(String inputPin) {
-
         return inputPin.equals(savedPin);
+    }
+
+    private void navigateToPinScreenActivity() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        boolean isPinSet = sharedPreferences.getBoolean("isPinSet", false); // Get the flag
+        if (isPinSet) {
+            Intent intent = new Intent(ConfirmPinActivity.this, PinScreenActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "PIN is not yet set.", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ConfirmPinActivity.this, EnterPinActivity.class));
+        }
     }
 }

@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EnterPinActivity extends AppCompatActivity {
 
         private static final int PIN_LENGTH = 4;
-
         private EditText pinInput;
         private View btnEnter, btnErase;
         private View[] numberButtons;
@@ -27,8 +26,7 @@ public class EnterPinActivity extends AppCompatActivity {
                 btnEnter = findViewById(R.id.btn_enter);
                 btnErase = findViewById(R.id.btn_erase);
 
-                // Initialize number buttons
-                numberButtons = new View[] {
+                numberButtons = new View[]{
                         findViewById(R.id.btn_0),
                         findViewById(R.id.btn_1),
                         findViewById(R.id.btn_2),
@@ -43,46 +41,28 @@ public class EnterPinActivity extends AppCompatActivity {
 
                 setupButtonListeners();
 
-                // Set enter button image
                 btnEnter.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_check));
-
-                // Set erase button image
                 btnErase.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_erase));
         }
 
         private void setupButtonListeners() {
-                // Set up number button click listeners
                 for (int i = 0; i < numberButtons.length; i++) {
                         int digit = i;
-                        numberButtons[i].setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                        appendDigitToPin(digit);
-                                }
-                        });
+                        numberButtons[i].setOnClickListener(v -> appendDigitToPin(digit));
                 }
 
-                // Set up enter button click listener
-                btnEnter.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                                String pin = pinInput.getText().toString();
-                                if (pin.length() == PIN_LENGTH) {
-                                        savePin(pin);
-                                        navigateToConfirmPinActivity();
-                                } else {
-                                        Toast.makeText(EnterPinActivity.this, "Invalid PIN", Toast.LENGTH_SHORT).show();
-                                }
+                btnEnter.setOnClickListener(v -> {
+                        String pin = pinInput.getText().toString();
+                        if (pin.length() == PIN_LENGTH) {
+                                savePin(pin);
+                                setPinSetFlag(true);
+                                navigateToConfirmPinActivity();
+                        } else {
+                                Toast.makeText(EnterPinActivity.this, "Invalid PIN", Toast.LENGTH_SHORT).show();
                         }
                 });
 
-                // Set up erase button click listener
-                btnErase.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                                pinInput.setText("");
-                        }
-                });
+                btnErase.setOnClickListener(v -> pinInput.setText(""));
         }
 
         private void appendDigitToPin(int digit) {
@@ -98,7 +78,13 @@ public class EnterPinActivity extends AppCompatActivity {
                 sharedPreferences.edit().putString("pin", pin).apply();
         }
 
+        private void setPinSetFlag(boolean isSet) {
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                sharedPreferences.edit().putBoolean("isPinSet", isSet).apply();
+        }
+
         private void navigateToConfirmPinActivity() {
+                setPinSetFlag(true);
                 Intent intent = new Intent(EnterPinActivity.this, ConfirmPinActivity.class);
                 startActivity(intent);
                 finish();
