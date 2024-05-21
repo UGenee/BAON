@@ -42,6 +42,7 @@
         android:textSize="20sp"
         android:ems="4"
         android:textStyle="bold"
+        android:focusable="false"
         android:inputType="numberPassword"
         android:backgroundTint="@color/white"/>
 

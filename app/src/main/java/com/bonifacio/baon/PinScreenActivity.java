@@ -72,7 +72,8 @@ public class PinScreenActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(PinScreenActivity.this, "Invalid PIN", Toast.LENGTH_SHORT).show();
+                    pinEditText.setText("");
+                    Toast.makeText(PinScreenActivity.this, "Incorrect PIN", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(PinScreenActivity.this, "PIN must be " + PIN_LENGTH + " digits", Toast.LENGTH_SHORT).show();

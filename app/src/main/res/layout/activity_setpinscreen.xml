@@ -43,6 +43,7 @@
         android:ems="4"
         android:textStyle="bold"
         android:inputType="numberPassword"
+        android:focusable="false"
         android:backgroundTint="@color/white"/>
 
     <LinearLayout

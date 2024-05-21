@@ -60,6 +60,8 @@ public class dashboard extends AppCompatActivity {
             }
         });
     }
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -82,6 +84,8 @@ public class dashboard extends AppCompatActivity {
                 }
             }
         });
+
+        // method call -> logic for the ttl bal & ttl expense
 
         // The list is not empty, so load content
         if (entries != null && entries.size() > 0) {
