@@ -1,22 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:background="@color/pin_screen"
-    tools:context=".pinscreen">
+    tools:context=".EnterPinActivity">
 
     <ImageView
         android:id="@+id/lock_img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_margin="30dp"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter"
         app:srcCompat="@drawable/lock" />
 
     <TextView
@@ -25,69 +22,101 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lock_img"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="@string/setup"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/n_pin_pass"
+    <LinearLayout
+        android:id="@+id/pin_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_pin"
-        android:layout_marginTop="1dp"
-        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:ems="4"
-        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/circle1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/circle_empty" />
+
+        <View
+            android:id="@+id/circle2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/circle_empty" />
+
+        <View
+            android:id="@+id/circle3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/circle_empty" />
+
+        <View
+            android:id="@+id/circle4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/circle_empty" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/n_pin_pass"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:inputType="numberPassword"
-        android:focusable="false"
-        android:backgroundTint="@color/white"/>
+        android:maxLength="4"
+        android:visibility="invisible"/>
 
     <LinearLayout
         android:id="@+id/btns_row1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/n_pin_pass"
-        android:layout_marginTop="35dp"
-        android:gravity="center">
+        android:layout_below="@id/pin_container"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_1"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_1"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:textColor="@color/white"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground" />
 
         <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btn_2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_2"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:textColor="@color/white"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground" />
 
         <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btn_3"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_3"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:textColor="@color/white"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground" />
 
     </LinearLayout>
 
@@ -96,43 +125,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btns_row1"
-        android:layout_marginTop="30dp"
-        android:gravity="center" >
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_4"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_4"
+            android:textSize="28sp"
             android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:background="?android:attr/selectableItemBackground" />
 
         <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btn_5"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_5"
+            android:textSize="28sp"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground" />
 
         <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btn_6"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_6"
+            android:textSize="28sp"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground" />
 
     </LinearLayout>
 
@@ -141,43 +171,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btns_row2"
-        android:layout_marginTop="30dp"
-        android:gravity="center" >
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_7"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:textColor="@color/white"
-            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_7"
-            android:textSize="30sp" />
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:background="?android:attr/selectableItemBackground" />
 
         <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btn_8"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_8"
+            android:textSize="28sp"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground" />
 
         <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btn_9"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_9"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:textColor="@color/white"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground" />
 
     </LinearLayout>
 
@@ -186,36 +217,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btns_row3"
-        android:layout_marginTop="30dp"
-        android:gravity="center" >
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/btn_enter"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             app:srcCompat="@drawable/btn_check" />
 
         <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btn_0"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:text="@string/btn_0"
+            android:textSize="28sp"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground" />
 
         <Space
-            android:layout_width="30dp"
-            android:layout_height="match_parent"/>
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/btn_erase"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             app:srcCompat="@drawable/btn_erase" />
 
     </LinearLayout>

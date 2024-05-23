@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +21,9 @@ public class ConfirmPinActivity extends AppCompatActivity {
     private String savedPin;
     private ImageView confirmButton, eraseButton;
 
+    private View[] numberButtons;
+    private View[] pinCircles;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,18 +35,18 @@ public class ConfirmPinActivity extends AppCompatActivity {
         pinInput = findViewById(R.id.n_pin_pass);
         pinInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(PIN_LENGTH)});
 
-        View btn0 = findViewById(R.id.btn_0);
-        View btn1 = findViewById(R.id.btn_1);
-        View btn2 = findViewById(R.id.btn_2);
-        View btn3 = findViewById(R.id.btn_3);
-        View btn4 = findViewById(R.id.btn_4);
-        View btn5 = findViewById(R.id.btn_5);
-        View btn6 = findViewById(R.id.btn_6);
-        View btn7 = findViewById(R.id.btn_7);
-        View btn8 = findViewById(R.id.btn_8);
-        View btn9 = findViewById(R.id.btn_9);
-
-        View[] numberButtons = new View[]{btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
+        numberButtons = new View[]{
+                findViewById(R.id.btn_0),
+                findViewById(R.id.btn_1),
+                findViewById(R.id.btn_2),
+                findViewById(R.id.btn_3),
+                findViewById(R.id.btn_4),
+                findViewById(R.id.btn_5),
+                findViewById(R.id.btn_6),
+                findViewById(R.id.btn_7),
+                findViewById(R.id.btn_8),
+                findViewById(R.id.btn_9)
+        };
         setupNumberButtonListeners(numberButtons);
 
         confirmButton = findViewById(R.id.btn_enter);
@@ -49,7 +54,41 @@ public class ConfirmPinActivity extends AppCompatActivity {
 
         confirmButton.setOnClickListener(v -> checkPinValidity());
         eraseButton.setOnClickListener(v -> pinInput.setText(""));
+
+        pinCircles = new View[]{
+                findViewById(R.id.circle1),
+                findViewById(R.id.circle2),
+                findViewById(R.id.circle3),
+                findViewById(R.id.circle4)
+        };
+
+        pinInput.addTextChangedListener(new TextWatcher() { // For the input & erase
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                updatePinCircles(s.length());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
+
+    private void updatePinCircles(int length) { // For the circle UI function
+        for (int i = 0; i < pinCircles.length; i++) {
+            if (i < length) {
+                pinCircles[i].setBackgroundResource(R.drawable.circle_filled);
+            } else {
+                pinCircles[i].setBackgroundResource(R.drawable.circle_empty);
+            }
+        }
+    }
+
+
 
     private void setupNumberButtonListeners(View[] numberButtons) {
         for (int i = 0; i < numberButtons.length; i++) {
@@ -70,6 +109,7 @@ public class ConfirmPinActivity extends AppCompatActivity {
         if (verifyPin(inputPin)) {
             navigateToPinScreenActivity();
         } else {
+            pinInput.setText("");
             Toast.makeText(this, "Pin is incorrect", Toast.LENGTH_SHORT).show();
         }
     }
