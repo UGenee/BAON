@@ -22,7 +22,6 @@ public class PinScreenActivity extends AppCompatActivity {
     private ImageView enterButton;
     private ImageView eraseButton;
     private String savedPin;
-
     private View[] pinCircles;
 
     @Override
