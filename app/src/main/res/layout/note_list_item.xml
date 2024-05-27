@@ -21,12 +21,24 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/category"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/teal_700"/>
+
+        <TextView
+            android:paddingRight="20dp"
+            android:gravity="end"
             android:id="@+id/list_note_title"
-            android:layout_width="150dp"
+            android:layout_width="104dp"
             android:layout_height="24dp"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/red"
+            android:layout_alignParentEnd="true"
             android:text="Title"/>
 
         <TextView
@@ -37,7 +49,7 @@
             android:textSize="14sp"
             android:text="Medium Text"
             android:id="@+id/list_date"
-            android:layout_centerVertical="true"
+            android:layout_below="@id/list_note_title"
             android:layout_alignParentEnd="true"
             android:textColor="@color/white"
             android:textStyle="bold"/>

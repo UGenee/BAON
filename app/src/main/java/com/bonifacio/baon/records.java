@@ -69,6 +69,9 @@ public class records extends AppCompatActivity implements View.OnClickListener {
                 notes.setText(EntryNote.getContent());
                 DateTime = EntryNote.getDate();
                 mIsViewingOrUpdating = true;
+
+                int categoryPosition = adapter.getPosition(EntryNote.getCategory());
+                spinner.setSelection(categoryPosition);
             }
         } else {
             delete.setVisibility(View.GONE);
@@ -150,6 +153,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     private void validateAndSaveNote() {
         String title = budget.getText().toString();
         String content = notes.getText().toString();
+        String category = spinner.getSelectedItem().toString();
 
         if (title.isEmpty()) {
             Toast.makeText(records.this, "Please enter a title.", Toast.LENGTH_SHORT).show();
@@ -174,12 +178,14 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             EntryNote.setContent(notes.getText().toString());
             EntryNote.setDate(DateTime);
             db.updateEntry(EntryNote);
+            EntryNote.setCategory(category);
             mIsViewingOrUpdating = true;
         } else {
             EntryNote = new tbl_Entry();
             EntryNote.setEntryTitle(budget.getText().toString());
             EntryNote.setContent(notes.getText().toString());
             EntryNote.setDate(DateTime);
+            EntryNote.setCategory(category);
             db.addEntry(EntryNote);
         }
 

@@ -31,26 +31,33 @@ public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
         if(note != null) {
             TextView title = (TextView) convertView.findViewById( R.id.list_note_title);
             TextView date = (TextView) convertView.findViewById( R.id.list_date);
-            TextView content = (TextView) convertView.findViewById( R.id.list_category);
+            TextView content = convertView.findViewById(R.id.list_category);
+            TextView category = convertView.findViewById(R.id.category); // Correct ID for category
 
-            title.setText(note.getEntryTitle()); date.setText(note.getDateTimeFormatted(context) + "");
+            title.setText(note.getEntryTitle());
+            date.setText(note.getDateTimeFormatted(context) + "");
 
-        //correctly show preview of the content
-        // (not more than 50 char or more than one line!)
+            // Correctly show preview of the content (not more than 50 char or more than one line!)
             int toWrap = WRAP_CONTENT_LENGTH;
             int lineBreakIndex = note.getContent().indexOf('\n');
-        // used to wrap/cut the content
+
+            // Used to wrap/cut the content
             if(note.getContent().length() > WRAP_CONTENT_LENGTH || lineBreakIndex < WRAP_CONTENT_LENGTH) {
-                if(lineBreakIndex < WRAP_CONTENT_LENGTH) { toWrap = lineBreakIndex;
+                if(lineBreakIndex < WRAP_CONTENT_LENGTH) {
+                    toWrap = lineBreakIndex;
                 }
-                if(toWrap > 0) { content.setText(note.getContent().substring(
-                        0, toWrap) + "...");
+                if(toWrap > 0) {
+                    content.setText(note.getContent().substring(0, toWrap) + "...");
                 } else {
                     content.setText(note.getContent());
                 }
-            } else { //if less than 50 chars...leave it as is :P
+            } else {
+                // If less than 50 chars, leave it as is
                 content.setText(note.getContent());
             }
+
+            // Set the category text
+            category.setText(note.getCategory());
         }
 
         return convertView;

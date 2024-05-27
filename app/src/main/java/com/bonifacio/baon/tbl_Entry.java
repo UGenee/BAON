@@ -1,6 +1,8 @@
 package com.bonifacio.baon;
 
 import android.content.Context;
+import android.widget.Spinner;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,21 +13,31 @@ public class tbl_Entry implements Serializable {
     public String entryTitle;
     public String content;
     public long date;
+    public String category;
 
     public tbl_Entry() {
     }
 
-    public tbl_Entry(String entryTitle, String content, long date) {
+    public tbl_Entry(String entryTitle, String content, long date, String category) {
         this.entryTitle = entryTitle;
         this.content = content;
         this.date = date;
+        this.category = category;
     }
 
-    public tbl_Entry(int entryId, String entryTitle, String content, long date) {
+    public tbl_Entry(int entryId, String entryTitle, String content, long date, String category) {
         this.entryId = entryId;
         this.entryTitle = entryTitle;
         this.content = content;
         this.date = date;
+        this.category = category;
+    }
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
     public int getEntryId() {
 

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public class dashboard extends AppCompatActivity {
 
@@ -69,7 +70,7 @@ public class dashboard extends AppCompatActivity {
         // Access the database
         db = new DatabaseHandler(getApplicationContext());
         listView.setAdapter(null);
-        ArrayList<tbl_Entry> entries = db.getAllEntry();
+        List<tbl_Entry> entries = db.getAllEntries();
 
         // Sort the list according to date in reverse chronological order
         Collections.sort(entries, new Comparator<tbl_Entry>() {
@@ -90,7 +91,7 @@ public class dashboard extends AppCompatActivity {
         // The list is not empty, so load content
         if (entries != null && entries.size() > 0) {
             // Prepare adapter for customized ListView
-            final EntryAdapter ea = new EntryAdapter(getApplicationContext(), R.layout.note_list_item, entries);
+            final EntryAdapter ea = new EntryAdapter(getApplicationContext(), R.layout.note_list_item, (ArrayList<tbl_Entry>) entries);
             listView.setAdapter(ea);
 
             listView.setVisibility(View.VISIBLE);
