@@ -104,11 +104,11 @@
 
     <TextView
         android:id="@+id/total"
-        android:layout_width="154dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ttl"
         android:layout_alignParentEnd="true"
-
+        android:layout_marginEnd="40dp"
         android:text="total"
         android:textColor="@color/light_green"
         android:textSize="16sp"
