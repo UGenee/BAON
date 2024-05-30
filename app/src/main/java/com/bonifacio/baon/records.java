@@ -17,6 +17,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class records extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnCancel, btnSave, btnExpense, btnIncome, delete;
@@ -196,10 +198,17 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     private void validateAndSaveNote() {
         String title = budget.getText().toString().replace("₱", "").trim();
         String content = notes.getText().toString();
-        String category = spinner.getSelectedItem().toString();
+        String category;
+
+        // Determine the category based on isIncome flag
+        if (isIncome) {
+            category = "Income";
+        } else {
+            category = "Expense";
+        }
 
         if (title.isEmpty()) {
-            Toast.makeText(records.this, "Please enter a title.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(records.this, "Please enter a budget.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -214,20 +223,20 @@ public class records extends AppCompatActivity implements View.OnClickListener {
         if (EntryNote != null) {
             EntryNote.setEntryTitle(title);
             EntryNote.setContent(content);
+            EntryNote.setCategory(category);
             EntryNote.setDate(DateTime);
             db.updateEntry(EntryNote);
-            EntryNote.setCategory(category);
-            mIsViewingOrUpdating = true;
         } else {
-            EntryNote = new tbl_Entry();
-            EntryNote.setEntryTitle(title);
-            EntryNote.setContent(content);
-            EntryNote.setDate(DateTime);
-            EntryNote.setCategory(category);
-            db.addEntry(EntryNote);
+            tbl_Entry entry = new tbl_Entry();
+            entry.setEntryTitle(title);
+            entry.setContent(content);
+            entry.setCategory(category);
+            entry.setDate(DateTime);
+            db.addEntry(entry);
         }
 
-        startActivity(new Intent(records.this, dashboard.class));
+        Intent intent = new Intent(records.this, dashboard.class);
+        startActivity(intent);
         finish();
     }
 }

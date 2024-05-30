@@ -8,11 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
 
     Context context;
-
     public static final int WRAP_CONTENT_LENGTH = 50;
+
     public EntryAdapter(Context context, int resource, ArrayList<tbl_Entry> objects) {
         super(context, resource, objects);
         this.context = context;
@@ -20,33 +21,37 @@ public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        if(convertView == null) {
-            convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.note_list_item, null);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.note_list_item, null);
         }
 
         tbl_Entry note = getItem(position);
 
-        if(note != null) {
-            TextView title = (TextView) convertView.findViewById( R.id.list_note_title);
-            TextView date = (TextView) convertView.findViewById( R.id.list_date);
+        if (note != null) {
+            TextView title = convertView.findViewById(R.id.list_note_title);
+            TextView date = convertView.findViewById(R.id.list_date);
             TextView content = convertView.findViewById(R.id.list_category);
             TextView category = convertView.findViewById(R.id.category); // Correct ID for category
 
-            title.setText(note.getEntryTitle());
-            date.setText(note.getDateTimeFormatted(context) + "");
+            if (note.getCategory().equalsIgnoreCase("Income")) {
+                title.setText("+ ₱" + note.getEntryTitle());
+            } else if (note.getCategory().equalsIgnoreCase("Expense")) {
+                title.setText("- ₱" + note.getEntryTitle());
+            }
+
+            date.setText(note.getDateTimeFormatted(context));
+
 
             // Correctly show preview of the content (not more than 50 char or more than one line!)
             int toWrap = WRAP_CONTENT_LENGTH;
             int lineBreakIndex = note.getContent().indexOf('\n');
 
             // Used to wrap/cut the content
-            if(note.getContent().length() > WRAP_CONTENT_LENGTH || lineBreakIndex < WRAP_CONTENT_LENGTH) {
-                if(lineBreakIndex < WRAP_CONTENT_LENGTH) {
+            if (note.getContent().length() > WRAP_CONTENT_LENGTH || lineBreakIndex < WRAP_CONTENT_LENGTH) {
+                if (lineBreakIndex < WRAP_CONTENT_LENGTH) {
                     toWrap = lineBreakIndex;
                 }
-                if(toWrap > 0) {
+                if (toWrap > 0) {
                     content.setText(note.getContent().substring(0, toWrap) + "...");
                 } else {
                     content.setText(note.getContent());
@@ -58,9 +63,17 @@ public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
 
             // Set the category text
             category.setText(note.getCategory());
+
+            // Set the text color based on the category
+            if (note.getCategory().equalsIgnoreCase("Income")) {
+                title.setTextColor(getContext().getResources().getColor(R.color.incomeColor)); // Green for Income
+                content.setTextColor(getContext().getResources().getColor(R.color.incomeColor)); // Green for Income
+            } else if (note.getCategory().equalsIgnoreCase("Expense")) {
+                title.setTextColor(getContext().getResources().getColor(R.color.expenseColor)); // Red for Expense
+                content.setTextColor(getContext().getResources().getColor(R.color.expenseColor)); // Red for Expense
+            }
         }
 
         return convertView;
     }
-
 }

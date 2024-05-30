@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,8 +31,10 @@ public class dashboard extends AppCompatActivity {
     private ListView listView;
     private TextView balanceTextView, noRecordsTextView, totalTextView;
     private TextView dateTextView;
+    private TextView expenseTextView; // Add this line
     private Calendar selectedDate;
     DatabaseHandler db;
+    private static final int RECORDS_REQUEST_CODE = 1001; // Add this line
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +46,9 @@ public class dashboard extends AppCompatActivity {
         balanceTextView = findViewById(R.id.balance);
         noRecordsTextView = findViewById(R.id.NoRecords);
         dateTextView = findViewById(R.id.date);
-        totalTextView = findViewById(R.id.total);  // Add this line
+        totalTextView = findViewById(R.id.total);
         listView = findViewById(R.id.list_item);
+        expenseTextView = findViewById(R.id.expense); // Add this line
 
         // Hide no records text initially
         noRecordsTextView.setVisibility(View.GONE);
@@ -59,7 +63,7 @@ public class dashboard extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), records.class));
+                startActivityForResult(new Intent(getApplicationContext(), records.class), RECORDS_REQUEST_CODE); // Modify this line
             }
         });
 
@@ -167,7 +171,7 @@ public class dashboard extends AppCompatActivity {
                     // Open CreateActivity, passing the retrieved ID
                     Intent viewNoteIntent = new Intent(getApplicationContext(), records.class);
                     viewNoteIntent.putExtra("Id", Id + "");
-                    startActivity(viewNoteIntent);
+                    startActivityForResult(viewNoteIntent, RECORDS_REQUEST_CODE); // Modify this line
                 }
             });
         } else {
@@ -176,33 +180,40 @@ public class dashboard extends AppCompatActivity {
             noRecordsTextView.setVisibility(View.VISIBLE);
         }
 
-        // Calculate and update the total
-        updateTotal();
+        // Calculate and update the total and expenses
+        updateTotal(day, month, year);
     }
 
-    private void updateTotal() {
+    private void updateTotal(Integer day, Integer month, Integer year) {
         // Get all entries from the database
         List<tbl_Entry> entries = db.getAllEntries();
 
-        // Calculate the total sum of the budget entries
+        // Calculate the total sum of the budget entries and total expenses for the selected date
         double totalAmount = 0.0;
+        double totalExpenses = 0.0;
         boolean hasIncome = false;
         boolean hasExpense = false;
 
         for (tbl_Entry entry : entries) {
-            String amountString = entry.getEntryTitle();
-            try {
-                double amount = Double.parseDouble(amountString);
-                totalAmount += amount;
-
-                // Check if the entry is Income or Expense
-                if (amount > 0) {
-                    hasIncome = true;
-                } else {
-                    hasExpense = true;
+            Calendar entryCalendar = Calendar.getInstance();
+            entryCalendar.setTime(new Date(entry.getDate()));
+            if (entryCalendar.get(Calendar.DAY_OF_MONTH) == day &&
+                    entryCalendar.get(Calendar.MONTH) == month &&
+                    entryCalendar.get(Calendar.YEAR) == year) {
+                String amountString = entry.getEntryTitle();
+                try {
+                    double amount = Double.parseDouble(amountString);
+                    // Check if the entry is Income
+                    if (entry.getCategory().equalsIgnoreCase("Income")) {
+                        totalAmount += amount;
+                        hasIncome = true;
+                    } else if (entry.getCategory().equalsIgnoreCase("Expense")) {
+                        totalExpenses += amount;
+                        hasExpense = true;
+                    }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
             }
         }
 
@@ -210,13 +221,48 @@ public class dashboard extends AppCompatActivity {
         String formattedTotal = String.format("₱%.2f", totalAmount);
         totalTextView.setText(formattedTotal);
 
+        // Format the expenses with the Peso sign and set it to the expense TextView
+        String formattedExpenses = String.format("₱%.2f", totalExpenses);
+        expenseTextView.setText(formattedExpenses);
+
         // Set the text color based on the type of entries
         if (hasIncome && !hasExpense) {
             totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green for Income
         } else if (!hasIncome && hasExpense) {
             totalTextView.setTextColor(getResources().getColor(R.color.expenseColor)); // Red for Expense
+        } else if (hasIncome && hasExpense) {
+            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green for mixed entries
         } else {
-            totalTextView.setTextColor(getResources().getColor(android.R.color.black)); // Default color
+            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green by default
+        }
+
+        // Call the method to update available balance
+        updateAvailableBalance(totalAmount, totalExpenses);
+    }
+
+    private void updateAvailableBalance(double totalIncome, double totalExpenses) {
+        // Calculate the available balance
+        double availableBalance = totalIncome - totalExpenses;
+
+        // Format the available balance with the Peso sign
+        String formattedAvailableBalance = String.format("₱%.2f", availableBalance);
+
+        // Set the formatted available balance in the TextView
+        balanceTextView.setText(formattedAvailableBalance);
+    }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RECORDS_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null) {
+                boolean updated = data.getBooleanExtra("record_updated", false);
+                if (updated) {
+                    loadEntries(selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.YEAR));
+                }
+            }
         }
     }
 }

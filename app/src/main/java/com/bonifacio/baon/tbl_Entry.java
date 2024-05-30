@@ -1,7 +1,6 @@
 package com.bonifacio.baon;
 
 import android.content.Context;
-import android.widget.Spinner;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -32,6 +31,7 @@ public class tbl_Entry implements Serializable {
         this.date = date;
         this.category = category;
     }
+
     public String getCategory() {
         return category;
     }
@@ -39,51 +39,42 @@ public class tbl_Entry implements Serializable {
     public void setCategory(String category) {
         this.category = category;
     }
-    public int getEntryId() {
 
+    public int getEntryId() {
         return entryId;
     }
 
     public void setEntryId(int entryId) {
-
         this.entryId = entryId;
     }
 
     public String getEntryTitle() {
-
         return entryTitle;
     }
 
     public void setEntryTitle(String entryTitle) {
-
         this.entryTitle = entryTitle;
     }
 
     public String getContent() {
-
         return content;
     }
 
     public void setContent(String content) {
-
         this.content = content;
     }
 
     public long getDate() {
-
         return date;
     }
 
     public void setDate(long date) {
-
         this.date = date;
     }
 
-    // return the date in a specified format
     public String getDateTimeFormatted(Context context) {
-// DateFormat.getDateInstance(DateFormat.SHORT).format(mDateTime);
-        SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy"
-                , context.getResources().getConfiguration().locale); formatter.setTimeZone(TimeZone.getDefault());
+        SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy", context.getResources().getConfiguration().locale);
+        formatter.setTimeZone(TimeZone.getDefault());
         return formatter.format(new Date(date));
     }
 }
