@@ -1,24 +1,24 @@
 package com.bonifacio.baon;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class records extends AppCompatActivity implements View.OnClickListener {
 
-    private SQLiteDatabase SQLiteDatabase;
     private Button btnCancel, btnSave, btnExpense, btnIncome, delete;
     private EditText budget, notes;
     private Spinner spinner;
@@ -27,6 +27,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     private String EntryName;
     private tbl_Entry EntryNote;
     private long DateTime;
+    private boolean isIncome = true;  // Default to Income
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,6 @@ public class records extends AppCompatActivity implements View.OnClickListener {
         spinner.setAdapter(adapter);
 
         // Instantiation
-        spinner = findViewById(R.id.spin_category);
         budget = findViewById(R.id.budget_edit);
         notes = findViewById(R.id.note_edit);
         btnCancel = findViewById(R.id.btn_cancel);
@@ -57,15 +57,49 @@ public class records extends AppCompatActivity implements View.OnClickListener {
         btnIncome.setOnClickListener(this);
         delete.setOnClickListener(this);
 
+        // Add TextWatcher to budget EditText
+        budget.addTextChangedListener(new TextWatcher() {
+            private boolean isFormatting;
+            private int prevLength;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (!isFormatting) {
+                    prevLength = s.length();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!isFormatting && !s.toString().startsWith("₱")) {
+                    isFormatting = true;
+                    String newText = "₱" + s.toString().replace("₱", "");
+                    budget.setText(newText);
+                    budget.setSelection(newText.length());
+                    isFormatting = false;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!isFormatting) {
+                    isFormatting = true;
+                    if (s.length() > 0 && !s.toString().startsWith("₱")) {
+                        s.insert(0, "₱");
+                    }
+                    isFormatting = false;
+                }
+            }
+        });
+
         EntryName = getIntent().getStringExtra("Id");
         if (EntryName != null && !EntryName.isEmpty()) {
             int id = Integer.parseInt(EntryName);
             db = new DatabaseHandler(getApplicationContext());
             EntryNote = db.getEntry(id);
-            Log.d("STATUS", (EntryNote == null) + "");
             if (EntryNote != null) {
                 delete.setVisibility(View.VISIBLE);
-                budget.setText(EntryNote.getEntryTitle());
+                budget.setText("₱" + EntryNote.getEntryTitle());
                 notes.setText(EntryNote.getContent());
                 DateTime = EntryNote.getDate();
                 mIsViewingOrUpdating = true;
@@ -82,6 +116,13 @@ public class records extends AppCompatActivity implements View.OnClickListener {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("My Diary");
         }
+
+        // Set initial underline state
+        btnIncome.setBackgroundResource(R.drawable.underline);
+        btnExpense.setBackgroundResource(R.drawable.no_underline);
+
+        // Set initial text color to green for Income
+        budget.setTextColor(Color.GREEN);
     }
 
     @Override
@@ -93,31 +134,35 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             actionCancel();
         } else if (id == R.id.delete) {
             actionDelete();
-        } else if (view == btnCancel) {
-            finish();
         } else if (view == btnIncome) {
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.income_categories, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
+            budget.setTextColor(Color.GREEN);  // Set text color to green for income
+            btnIncome.setBackgroundResource(R.drawable.underline);
+            btnExpense.setBackgroundResource(R.drawable.no_underline);
+            isIncome = true;
         } else if (view == btnExpense) {
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.expense_categories, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
+            budget.setTextColor(Color.RED);  // Set text color to red for expense
+            btnIncome.setBackgroundResource(R.drawable.no_underline);
+            btnExpense.setBackgroundResource(R.drawable.underline);
+            isIncome = false;
         }
     }
 
     private void actionCancel() {
         if (!checkNoteAltered()) {
-            finish(); // No changes, directly finish the activity
+            finish();
         } else {
-            // If changes are made, show the confirmation dialog
             AlertDialog.Builder dialogCancel = new AlertDialog.Builder(this)
                     .setTitle("Discard changes...")
-                    .setMessage("Are you sure you do not want to save changes to this note?")
                     .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish(); // Finish the activity if user confirms
+                            finish();
                         }
                     })
                     .setNegativeButton("NO", null);
@@ -125,11 +170,9 @@ public class records extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-
     private void actionDelete() {
         AlertDialog.Builder dialogDelete = new AlertDialog.Builder(this)
                 .setTitle("Delete note")
-                .setMessage("Really delete the note?")
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -144,24 +187,19 @@ public class records extends AppCompatActivity implements View.OnClickListener {
 
     private boolean checkNoteAltered() {
         if (mIsViewingOrUpdating) {
-            return EntryNote != null && (!budget.getText().toString().equalsIgnoreCase(EntryNote.getEntryTitle()) || !notes.getText().toString().equalsIgnoreCase(EntryNote.getContent()));
+            return EntryNote != null && (!budget.getText().toString().equalsIgnoreCase("₱" + EntryNote.getEntryTitle()) || !notes.getText().toString().equalsIgnoreCase(EntryNote.getContent()));
         } else {
             return !budget.getText().toString().isEmpty() || !notes.getText().toString().isEmpty();
         }
     }
 
     private void validateAndSaveNote() {
-        String title = budget.getText().toString();
+        String title = budget.getText().toString().replace("₱", "").trim();
         String content = notes.getText().toString();
         String category = spinner.getSelectedItem().toString();
 
         if (title.isEmpty()) {
             Toast.makeText(records.this, "Please enter a title.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (content.isEmpty()) {
-            Toast.makeText(records.this, "Please enter a content.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -174,16 +212,16 @@ public class records extends AppCompatActivity implements View.OnClickListener {
         db = new DatabaseHandler(getApplicationContext());
 
         if (EntryNote != null) {
-            EntryNote.setEntryTitle(budget.getText().toString());
-            EntryNote.setContent(notes.getText().toString());
+            EntryNote.setEntryTitle(title);
+            EntryNote.setContent(content);
             EntryNote.setDate(DateTime);
             db.updateEntry(EntryNote);
             EntryNote.setCategory(category);
             mIsViewingOrUpdating = true;
         } else {
             EntryNote = new tbl_Entry();
-            EntryNote.setEntryTitle(budget.getText().toString());
-            EntryNote.setContent(notes.getText().toString());
+            EntryNote.setEntryTitle(title);
+            EntryNote.setContent(content);
             EntryNote.setDate(DateTime);
             EntryNote.setCategory(category);
             db.addEntry(EntryNote);

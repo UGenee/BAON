@@ -14,5 +14,6 @@
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
     <color name="darkblue">#00008B</color>
-
+    <color name="incomeColor">#00FF00</color>
+    <color name="expenseColor">#FF0000</color>
 </resources>
