@@ -198,7 +198,14 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     private void validateAndSaveNote() {
         String title = budget.getText().toString().replace("₱", "").trim();
         String content = notes.getText().toString();
-        String category = spinner.getSelectedItem().toString(); // Get selected category from spinner
+        String category;
+
+        // Determine the category based on isIncome flag
+        if (isIncome) {
+            category = "Income";
+        } else {
+            category = "Expense";
+        }
 
         if (title.isEmpty()) {
             Toast.makeText(records.this, "Please enter a budget.", Toast.LENGTH_SHORT).show();
@@ -216,21 +223,20 @@ public class records extends AppCompatActivity implements View.OnClickListener {
         if (EntryNote != null) {
             EntryNote.setEntryTitle(title);
             EntryNote.setContent(content);
-            EntryNote.setCategory(category); // Save the category
+            EntryNote.setCategory(category);
             EntryNote.setDate(DateTime);
             db.updateEntry(EntryNote);
         } else {
             tbl_Entry entry = new tbl_Entry();
             entry.setEntryTitle(title);
             entry.setContent(content);
-            entry.setCategory(category); // Save the category
+            entry.setCategory(category);
             entry.setDate(DateTime);
             db.addEntry(entry);
         }
 
         Intent intent = new Intent(records.this, dashboard.class);
-        intent.putExtra("record_updated", true);
-        setResult(RESULT_OK, intent);
+        startActivity(intent);
         finish();
     }
 }

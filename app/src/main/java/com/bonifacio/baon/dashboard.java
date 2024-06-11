@@ -232,6 +232,8 @@ public class dashboard extends AppCompatActivity {
             totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green for Income
         } else if (!hasIncome && hasExpense) {
             totalTextView.setTextColor(getResources().getColor(R.color.expenseColor)); // Red for Expense
+        } else if (hasIncome && hasExpense) {
+            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green for mixed entries
         } else {
             totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green by default
         }
