@@ -154,12 +154,11 @@ public class dashboard extends AppCompatActivity {
             }
         });
 
-        // The list is not empty, so load content
+        // Update visibility of NoRecords TextView based on entries size
         if (entries != null && entries.size() > 0) {
             // Prepare adapter for customized ListView
             final EntryAdapter ea = new EntryAdapter(getApplicationContext(), R.layout.note_list_item, (ArrayList<tbl_Entry>) entries);
             listView.setAdapter(ea);
-
             listView.setVisibility(View.VISIBLE);
 
             // If an item of listView is clicked
@@ -174,6 +173,8 @@ public class dashboard extends AppCompatActivity {
                     startActivityForResult(viewNoteIntent, RECORDS_REQUEST_CODE); // Modify this line
                 }
             });
+            // Hide NoRecords TextView
+            noRecordsTextView.setVisibility(View.GONE);
         } else {
             // If no entries found, hide the list view or show a message
             listView.setVisibility(View.GONE);
@@ -206,7 +207,8 @@ public class dashboard extends AppCompatActivity {
                     // Check if the entry is Income
                     if (entry.getCategory().equalsIgnoreCase("Income")) {
                         totalAmount += amount;
-                        hasIncome = true;
+                        hasIncome = true
+                        ;
                     } else if (entry.getCategory().equalsIgnoreCase("Expense")) {
                         totalExpenses += amount;
                         hasExpense = true;
@@ -230,8 +232,6 @@ public class dashboard extends AppCompatActivity {
             totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green for Income
         } else if (!hasIncome && hasExpense) {
             totalTextView.setTextColor(getResources().getColor(R.color.expenseColor)); // Red for Expense
-        } else if (hasIncome && hasExpense) {
-            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green for mixed entries
         } else {
             totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green by default
         }

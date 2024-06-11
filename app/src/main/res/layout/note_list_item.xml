@@ -27,7 +27,7 @@
             android:text="Category"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/teal_700"/>
+            android:textColor="@color/white"/>
 
         <TextView
             android:paddingRight="20dp"
@@ -39,7 +39,7 @@
             android:textStyle="bold"
             android:textColor="@color/red"
             android:layout_alignParentEnd="true"
-            android:text="Title"/>
+            android:text="budget"/>
 
         <TextView
             android:paddingRight="20dp"
@@ -60,7 +60,7 @@
             android:layout_height="24dp"
             android:layout_below="@id/list_note_title"
             android:textSize="14sp"
-            android:textColor="@color/bg_dashboard"
+            android:textColor="@color/teal_700"
             android:text="Subtitle"/>
 
     </RelativeLayout>

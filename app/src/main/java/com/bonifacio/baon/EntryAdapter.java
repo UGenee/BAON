@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.note_list_item, null);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.note_list_item, parent, false);
         }
 
         tbl_Entry note = getItem(position);
@@ -31,16 +32,14 @@ public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
             TextView title = convertView.findViewById(R.id.list_note_title);
             TextView date = convertView.findViewById(R.id.list_date);
             TextView content = convertView.findViewById(R.id.list_category);
-            TextView category = convertView.findViewById(R.id.category); // Correct ID for category
+            TextView category = convertView.findViewById(R.id.category);
+            ImageView icon = convertView.findViewById(R.id.item_icon); // Add this line
 
-            if (note.getCategory().equalsIgnoreCase("Income")) {
-                title.setText("+ ₱" + note.getEntryTitle());
-            } else if (note.getCategory().equalsIgnoreCase("Expense")) {
-                title.setText("- ₱" + note.getEntryTitle());
-            }
+            // Set title to whatever the user inputted in the budget_edit
+            title.setText("₱" + note.getEntryTitle());
 
+            // Set date
             date.setText(note.getDateTimeFormatted(context));
-
 
             // Correctly show preview of the content (not more than 50 char or more than one line!)
             int toWrap = WRAP_CONTENT_LENGTH;
@@ -72,6 +71,9 @@ public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
                 title.setTextColor(getContext().getResources().getColor(R.color.expenseColor)); // Red for Expense
                 content.setTextColor(getContext().getResources().getColor(R.color.expenseColor)); // Red for Expense
             }
+
+            // Set the image based on the category
+            icon.setImageResource(SpinnerImages.getImageResource(note.getCategory()));
         }
 
         return convertView;
