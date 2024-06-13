@@ -11,13 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.List;
 
 public class records extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +29,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     private tbl_Entry EntryNote;
     private long DateTime;
     private boolean isIncome = true;  // Default to Income
+    private TextView categoryTextView;  // Reference to the category TextView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
         btnExpense = findViewById(R.id.expense);
         btnIncome = findViewById(R.id.income);
         delete = findViewById(R.id.delete);
+        categoryTextView = findViewById(R.id.category);  // Reference to the category TextView
 
         // Set click listeners
         btnCancel.setOnClickListener(this);
@@ -108,6 +109,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
 
                 int categoryPosition = adapter.getPosition(EntryNote.getCategory());
                 spinner.setSelection(categoryPosition);
+                categoryTextView.setText(EntryNote.getCategory());  // Set the category TextView
             }
         } else {
             delete.setVisibility(View.GONE);
@@ -144,6 +146,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             btnIncome.setBackgroundResource(R.drawable.underline);
             btnExpense.setBackgroundResource(R.drawable.no_underline);
             isIncome = true;
+            updateCategoryTextView();  // Update the category TextView
         } else if (view == btnExpense) {
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.expense_categories, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -152,7 +155,13 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             btnIncome.setBackgroundResource(R.drawable.no_underline);
             btnExpense.setBackgroundResource(R.drawable.underline);
             isIncome = false;
+            updateCategoryTextView();  // Update the category TextView
         }
+    }
+
+    private void updateCategoryTextView() {
+        String selectedCategory = spinner.getSelectedItem().toString();
+        categoryTextView.setText(selectedCategory);  // Set the category TextView to the selected category
     }
 
     private void actionCancel() {
@@ -198,14 +207,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     private void validateAndSaveNote() {
         String title = budget.getText().toString().replace("₱", "").trim();
         String content = notes.getText().toString();
-        String category;
-
-        // Determine the category based on isIncome flag
-        if (isIncome) {
-            category = "Income";
-        } else {
-            category = "Expense";
-        }
+        String category = spinner.getSelectedItem().toString();  // Get the selected category from the Spinner
 
         if (title.isEmpty()) {
             Toast.makeText(records.this, "Please enter a budget.", Toast.LENGTH_SHORT).show();
