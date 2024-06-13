@@ -14,6 +14,7 @@
             </item>
 
             <item
+
                 android:drawable="@drawable/arrow"
                 android:gravity="end"/>
 

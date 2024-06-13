@@ -18,68 +18,65 @@
     <View
         android:id="@+id/bg"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@color/bg_dashboard"/>
+        android:layout_height="169dp"
+        android:background="@color/bg_dashboard" />
 
     <View
         android:id="@+id/top_panel"
         android:layout_width="350dp"
         android:layout_height="100dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/dash_panel"/>
+        android:background="@drawable/dash_panel" />
 
     <TextView
         android:id="@+id/avail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="65dp"
         android:layout_marginStart="55dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:text="@string/avail_blc"/>
+        android:text="@string/avail_blc" />
 
     <TextView
         android:id="@+id/balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="73dp"
         android:layout_marginStart="55dp"
+        android:layout_below="@id/avail"
         android:textColor="@color/white"
         android:text="balance"
         android:textStyle="bold"
         android:textSize="25sp" />
 
-
-
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="79dp"
         android:layout_marginStart="65dp"
         android:layout_marginEnd="30dp"
         android:layout_alignParentEnd="true"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:text="@string/date"/>
-
-
-
+        android:text="@string/date"
+        android:clickable="true"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/ttl_ex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="190dp"
         android:layout_marginStart="40dp"
         android:layout_alignParentStart="true"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="@string/ttl_ex"/>
+        android:text="@string/ttl_ex" />
 
     <TextView
         android:id="@+id/expense"
@@ -87,54 +84,72 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ttl_ex"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="40dp"
         android:textColor="@color/red"
         android:textStyle="bold"
+        android:text="exp"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/ttl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="77dp"
-        android:layout_marginTop="175dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="40dp"
+        android:text="@string/ttl"
         android:textColor="@color/white"
-        android:textStyle="bold"
         android:textSize="16sp"
-        android:text="@string/ttl"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ttl"
-        android:layout_marginEnd="65dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginEnd="40dp"
+        android:text="total"
         android:textColor="@color/light_green"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/dash_line"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_marginTop="230dp"
-        android:background="@drawable/dash_line"/>
+        android:layout_marginTop="250dp"
+        android:background="@drawable/dash_line" />
 
+    <ListView
+        android:id="@+id/list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:layout_below="@id/dash_line" />
 
-    <ImageView
-        android:id="@+id/btn_add"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
+    <TextView
+        android:id="@+id/NoRecords"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/white"
+        android:layout_below="@id/dash_line"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:text="No Records"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="50dp"
-        app:srcCompat="@drawable/add"
-        android:background="@drawable/circle_add"
-        android:onClick="Add" />
-
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="80dp"
+        android:tint="@color/white"
+        app:backgroundTint="@color/teal_200"
+        app:rippleColor="@color/teal_700"
+        android:src="@drawable/add" />
 
 </RelativeLayout>
-

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@color/pin_screen"
-    tools:context=".PinScreenActivity">
+    tools:context=".ConfirmPinActivity">
 
     <ImageView
         android:id="@+id/lock_img"
@@ -25,7 +25,7 @@
         android:layout_below="@id/lock_img"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/etr_pin"
+        android:text="@string/confirm"
         android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold" />
@@ -253,6 +253,5 @@
             app:srcCompat="@drawable/btn_erase" />
 
     </LinearLayout>
-
 
 </RelativeLayout>
