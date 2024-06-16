@@ -198,14 +198,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     private void validateAndSaveNote() {
         String title = budget.getText().toString().replace("₱", "").trim();
         String content = notes.getText().toString();
-        String category;
-
-        // Determine the category based on isIncome flag
-        if (isIncome) {
-            category = "Income";
-        } else {
-            category = "Expense";
-        }
+        String category = spinner.getSelectedItem().toString(); // Get the selected category from the spinner
 
         if (title.isEmpty()) {
             Toast.makeText(records.this, "Please enter a budget.", Toast.LENGTH_SHORT).show();
@@ -235,8 +228,10 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             db.addEntry(entry);
         }
 
-        Intent intent = new Intent(records.this, dashboard.class);
-        startActivity(intent);
+        Intent intent = new Intent();
+        intent.putExtra("record_updated", true);
+        intent.putExtra("category", category); // Pass the selected category to the dashboard
+        setResult(RESULT_OK, intent);
         finish();
     }
 }
