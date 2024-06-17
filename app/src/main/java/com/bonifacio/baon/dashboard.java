@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,14 +26,13 @@ import java.util.Locale;
 
 public class dashboard extends AppCompatActivity {
 
-    private ImageView btnAdd;
+    private TextView balanceTextView, noRecordsTextView, dateTextView, totalTextView, expenseTextView;
     private ListView listView;
-    private TextView balanceTextView, noRecordsTextView, totalTextView;
-    private TextView dateTextView;
-    private TextView expenseTextView; // Add this line
     private Calendar selectedDate;
-    DatabaseHandler db;
-    private static final int RECORDS_REQUEST_CODE = 1001; // Add this line
+    private DatabaseHandler db;
+
+    private FloatingActionButton fab;
+    private static final int RECORDS_REQUEST_CODE = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +46,7 @@ public class dashboard extends AppCompatActivity {
         dateTextView = findViewById(R.id.date);
         totalTextView = findViewById(R.id.total);
         listView = findViewById(R.id.list_item);
-        expenseTextView = findViewById(R.id.expense); // Add this line
-
-        // Hide no records text initially
-        noRecordsTextView.setVisibility(View.GONE);
-
-        // Set up balance TextView
-        Intent intent = getIntent();
-        String budgetInput = intent.getStringExtra("BUDGET_INPUT");
-        balanceTextView.setText(budgetInput);
+        expenseTextView = findViewById(R.id.expense);
 
         // Set up FloatingActionButton
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -78,20 +68,24 @@ public class dashboard extends AppCompatActivity {
                 showDatePickerDialog();
             }
         });
+
+        // Initialize database handler
+        db = new DatabaseHandler(getApplicationContext());
+
+        // Load entries for the current date
+        loadEntries(selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.YEAR));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Access the database
-        db = new DatabaseHandler(getApplicationContext());
+        // Reload entries on resume
         loadEntries(selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.YEAR));
     }
 
     private void updateDateTextView() {
-        // Format the selected date as "MMMM yyyy"
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
+        // Format the selected date as "MMMM dd, yyyy"
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
         String dateString = dateFormat.format(selectedDate.getTime());
         dateTextView.setText(dateString);
     }
@@ -101,99 +95,77 @@ public class dashboard extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
-                        // Update the calendar with the selected date
-                        selectedDate.set(Calendar.YEAR, selectedYear);
-                        selectedDate.set(Calendar.MONTH, selectedMonth);
-                        selectedDate.set(Calendar.DAY_OF_MONTH, selectedDay);
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // Update the selectedDate calendar with the selected date
+                        selectedDate.set(Calendar.YEAR, year);
+                        selectedDate.set(Calendar.MONTH, monthOfYear);
+                        selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                        // Update the TextView with the selected date
+                        // Update the date TextView with the selected date
                         updateDateTextView();
 
-                        // Load entries for the selected day, month, and year
-                        loadEntries(selectedDay, selectedMonth, selectedYear);
-
-                        // Hide noRecordsTextView if it's the current day
-                        Calendar currentCalendar = Calendar.getInstance();
-                        if (selectedYear == currentCalendar.get(Calendar.YEAR) &&
-                                selectedMonth == currentCalendar.get(Calendar.MONTH) &&
-                                selectedDay == currentCalendar.get(Calendar.DAY_OF_MONTH)) {
-                            noRecordsTextView.setVisibility(View.GONE);
-                        }
+                        // Reload entries for the selected date
+                        loadEntries(dayOfMonth, monthOfYear, year);
                     }
-                }, selectedDate.get(Calendar.YEAR), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.DAY_OF_MONTH));
+                },
+                selectedDate.get(Calendar.YEAR), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
     }
 
     private void loadEntries(Integer day, Integer month, Integer year) {
-        listView.setAdapter(null);
         List<tbl_Entry> entries = db.getAllEntries();
 
-        // Filter entries by selected day, month, and year if provided
-        if (day != null && month != null && year != null) {
-            List<tbl_Entry> filteredEntries = new ArrayList<>();
-            for (tbl_Entry entry : entries) {
-                Calendar entryCalendar = Calendar.getInstance();
-                entryCalendar.setTime(new Date(entry.getDate()));
-                if (entryCalendar.get(Calendar.DAY_OF_MONTH) == day &&
-                        entryCalendar.get(Calendar.MONTH) == month &&
-                        entryCalendar.get(Calendar.YEAR) == year) {
-                    filteredEntries.add(entry);
-                }
+        // Filter entries by selected day, month, and year
+        List<tbl_Entry> filteredEntries = new ArrayList<>();
+        for (tbl_Entry entry : entries) {
+            Calendar entryCalendar = Calendar.getInstance();
+            entryCalendar.setTime(new Date(entry.getDate()));
+            if (entryCalendar.get(Calendar.DAY_OF_MONTH) == day &&
+                    entryCalendar.get(Calendar.MONTH) == month &&
+                    entryCalendar.get(Calendar.YEAR) == year) {
+                filteredEntries.add(entry);
             }
-            entries = filteredEntries;
         }
+        entries = filteredEntries;
 
-        // Sort the list according to date in reverse chronological order
+        // Sort entries in reverse chronological order
         Collections.sort(entries, new Comparator<tbl_Entry>() {
             @Override
             public int compare(tbl_Entry lhs, tbl_Entry rhs) {
-                Date left = new Date(lhs.getDate());
-                Date right = new Date(rhs.getDate());
-                return right.compareTo(left);
+                return Long.compare(rhs.getDate(), lhs.getDate());
             }
         });
 
-        // Update visibility of NoRecords TextView based on entries size
-        if (entries != null && entries.size() > 0) {
-            // Prepare adapter for customized ListView
-            final EntryAdapter ea = new EntryAdapter(getApplicationContext(), R.layout.note_list_item, (ArrayList<tbl_Entry>) entries);
-            listView.setAdapter(ea);
+        // Update visibility of NoRecords TextView
+        if (!entries.isEmpty()) {
+            EntryAdapter adapter = new EntryAdapter(getApplicationContext(), R.layout.note_list_item, (ArrayList<tbl_Entry>) entries);
+            listView.setAdapter(adapter);
             listView.setVisibility(View.VISIBLE);
+            noRecordsTextView.setVisibility(View.GONE);
 
-            // If an item of listView is clicked
+            // Handle click on ListView item
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // Get its ID
-                    int Id = ((tbl_Entry) listView.getItemAtPosition(position)).getEntryId();
-                    // Open CreateActivity, passing the retrieved ID
+                    int entryId = ((tbl_Entry) listView.getItemAtPosition(position)).getEntryId();
                     Intent viewNoteIntent = new Intent(getApplicationContext(), records.class);
-                    viewNoteIntent.putExtra("Id", Id + "");
-                    startActivityForResult(viewNoteIntent, RECORDS_REQUEST_CODE); // Modify this line
+                    viewNoteIntent.putExtra("Id", String.valueOf(entryId));
+                    startActivityForResult(viewNoteIntent, RECORDS_REQUEST_CODE);
                 }
             });
-            // Hide NoRecords TextView
-            noRecordsTextView.setVisibility(View.GONE);
         } else {
-            // If no entries found, hide the list view or show a message
             listView.setVisibility(View.GONE);
             noRecordsTextView.setVisibility(View.VISIBLE);
         }
 
-        // Calculate and update the total and expenses
+        // Calculate and update total and expenses
         updateTotal(day, month, year);
     }
 
     private void updateTotal(Integer day, Integer month, Integer year) {
-        // Get all entries from the database
         List<tbl_Entry> entries = db.getAllEntries();
-
-        // Calculate the total sum of the budget entries and total expenses for the selected date
-        double totalAmount = 0.0;
+        double totalIncome = 0.0;
         double totalExpenses = 0.0;
-        boolean hasIncome = false;
-        boolean hasExpense = false;
 
         for (tbl_Entry entry : entries) {
             Calendar entryCalendar = Calendar.getInstance();
@@ -201,17 +173,12 @@ public class dashboard extends AppCompatActivity {
             if (entryCalendar.get(Calendar.DAY_OF_MONTH) == day &&
                     entryCalendar.get(Calendar.MONTH) == month &&
                     entryCalendar.get(Calendar.YEAR) == year) {
-                String amountString = entry.getEntryTitle();
                 try {
-                    double amount = Double.parseDouble(amountString);
-                    // Check if the entry is Income
-                    if (entry.getCategory().equalsIgnoreCase("Income")) {
-                        totalAmount += amount;
-                        hasIncome = true
-                        ;
-                    } else if (entry.getCategory().equalsIgnoreCase("Expense")) {
+                    double amount = Double.parseDouble(entry.getEntryTitle());
+                    if (entry.getCategory().equalsIgnoreCase(getString(R.string.category_allowance))) {
+                        totalIncome += amount;
+                    } else {
                         totalExpenses += amount;
-                        hasExpense = true;
                     }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
@@ -219,51 +186,31 @@ public class dashboard extends AppCompatActivity {
             }
         }
 
-        // Format the total with the Peso sign and set it to the total TextView
-        String formattedTotal = String.format("₱%.2f", totalAmount);
-        totalTextView.setText(formattedTotal);
+        String formattedIncome = String.format("₱%.2f", totalIncome);
+        totalTextView.setText(formattedIncome);
 
-        // Format the expenses with the Peso sign and set it to the expense TextView
         String formattedExpenses = String.format("₱%.2f", totalExpenses);
         expenseTextView.setText(formattedExpenses);
 
-        // Set the text color based on the type of entries
-        if (hasIncome && !hasExpense) {
-            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green for Income
-        } else if (!hasIncome && hasExpense) {
-            totalTextView.setTextColor(getResources().getColor(R.color.expenseColor)); // Red for Expense
-        } else if (hasIncome && hasExpense) {
-            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green for mixed entries
-        } else {
-            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor)); // Green by default
-        }
-
-        // Call the method to update available balance
-        updateAvailableBalance(totalAmount, totalExpenses);
-    }
-
-    private void updateAvailableBalance(double totalIncome, double totalExpenses) {
-        // Calculate the available balance
         double availableBalance = totalIncome - totalExpenses;
+        String formattedBalance = String.format("₱%.2f", availableBalance);
+        balanceTextView.setText(formattedBalance);
 
-        // Format the available balance with the Peso sign
-        String formattedAvailableBalance = String.format("₱%.2f", availableBalance);
-
-        // Set the formatted available balance in the TextView
-        balanceTextView.setText(formattedAvailableBalance);
+        if (totalIncome > 0) {
+            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor));
+        } else if (totalExpenses > 0) {
+            totalTextView.setTextColor(getResources().getColor(R.color.expenseColor));
+        } else {
+            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor));
+        }
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RECORDS_REQUEST_CODE && resultCode == RESULT_OK) {
-            if (data != null) {
-                boolean updated = data.getBooleanExtra("record_updated", false);
-                if (updated) {
-                    loadEntries(selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.YEAR));
-                }
+            if (data != null && data.getBooleanExtra("record_updated", false)) {
+                loadEntries(selectedDate.get(Calendar.DAY_OF_MONTH), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.YEAR));
             }
         }
     }

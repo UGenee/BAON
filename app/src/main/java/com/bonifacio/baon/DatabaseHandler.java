@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-
     private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "YourDatabaseName";
     private static final String TBL_ENTRY = "tbl_Entry";

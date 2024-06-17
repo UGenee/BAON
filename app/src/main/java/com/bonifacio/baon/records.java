@@ -13,11 +13,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.List;
 
 public class records extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,7 +23,6 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     private Spinner spinner;
     private DatabaseHandler db;
     private boolean mIsViewingOrUpdating;
-    private String EntryName;
     private tbl_Entry EntryNote;
     private long DateTime;
     private boolean isIncome = true;  // Default to Income
@@ -34,7 +30,6 @@ public class records extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_records);
 
         // Default spinner
@@ -94,9 +89,10 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
-        EntryName = getIntent().getStringExtra("Id");
-        if (EntryName != null && !EntryName.isEmpty()) {
-            int id = Integer.parseInt(EntryName);
+        // Retrieve entry ID from intent
+        String entryId = getIntent().getStringExtra("Id");
+        if (entryId != null && !entryId.isEmpty()) {
+            int id = Integer.parseInt(entryId);
             db = new DatabaseHandler(getApplicationContext());
             EntryNote = db.getEntry(id);
             if (EntryNote != null) {
@@ -113,10 +109,6 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             delete.setVisibility(View.GONE);
             DateTime = System.currentTimeMillis();
             mIsViewingOrUpdating = false;
-        }
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("My Diary");
         }
 
         // Set initial underline state
@@ -230,7 +222,8 @@ public class records extends AppCompatActivity implements View.OnClickListener {
 
         Intent intent = new Intent();
         intent.putExtra("record_updated", true);
-        intent.putExtra("category", category); // Pass the selected category to the dashboard
+        // this will make it so that the spinner becomes the title for that listview
+        intent.putExtra("category", category);
         setResult(RESULT_OK, intent);
         finish();
     }
