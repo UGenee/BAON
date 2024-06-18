@@ -16,4 +16,5 @@
     <color name="darkblue">#00008B</color>
     <color name="incomeColor">#00FF00</color>
     <color name="expenseColor">#FF0000</color>
+    <color name="gold">#FFB000</color>
 </resources>

@@ -3,6 +3,7 @@ package com.bonifacio.baon;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -208,9 +209,11 @@ public class records extends AppCompatActivity implements View.OnClickListener {
         String content = notes.getText().toString();
         String category = spinner.getSelectedItem().toString(); // Get the selected category from the spinner
 
-        if (title.isEmpty()) {
-            Toast.makeText(records.this, "Please enter a budget.", Toast.LENGTH_SHORT).show();
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            if (title.isEmpty()) {
+                Toast.makeText(records.this, "Please enter a budget.", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         if (EntryNote != null) {
