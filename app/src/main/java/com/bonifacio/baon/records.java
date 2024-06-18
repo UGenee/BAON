@@ -68,7 +68,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!isFormatting && !s.toString().startsWith("₱")) {
+                if (!isFormatting &&!s.toString().startsWith("₱")) {
                     isFormatting = true;
                     String newText = "₱" + s.toString().replace("₱", "");
                     budget.setText(newText);
@@ -81,7 +81,7 @@ public class records extends AppCompatActivity implements View.OnClickListener {
             public void afterTextChanged(Editable s) {
                 if (!isFormatting) {
                     isFormatting = true;
-                    if (s.length() > 0 && !s.toString().startsWith("₱")) {
+                    if (s.length() > 0 &&!s.toString().startsWith("₱")) {
                         s.insert(0, "₱");
                     }
                     isFormatting = false;
@@ -102,8 +102,24 @@ public class records extends AppCompatActivity implements View.OnClickListener {
                 DateTime = EntryNote.getDate();
                 mIsViewingOrUpdating = true;
 
-                int categoryPosition = adapter.getPosition(EntryNote.getCategory());
+                // Set the spinner selection to the existing category
+                String category = EntryNote.getCategory();
+                ArrayAdapter<CharSequence> adapterspinner = (ArrayAdapter<CharSequence>) spinner.getAdapter();
+                int categoryPosition = adapterspinner.getPosition(category);
                 spinner.setSelection(categoryPosition);
+
+                // Set the text color and underline based on the existing category
+                if (category.equalsIgnoreCase("Income")) {
+                    budget.setTextColor(Color.GREEN);
+                    btnIncome.setBackgroundResource(R.drawable.underline);
+                    btnExpense.setBackgroundResource(R.drawable.no_underline);
+                    isIncome = true;
+                } else {
+                    budget.setTextColor(Color.RED);
+                    btnIncome.setBackgroundResource(R.drawable.no_underline);
+                    btnExpense.setBackgroundResource(R.drawable.underline);
+                    isIncome = false;
+                }
             }
         } else {
             delete.setVisibility(View.GONE);

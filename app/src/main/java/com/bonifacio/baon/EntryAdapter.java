@@ -64,12 +64,16 @@ public class EntryAdapter extends ArrayAdapter<tbl_Entry> {
             category.setText(note.getCategory());
 
             // Set the text color based on the category
-            if (note.getCategory().equalsIgnoreCase("Income")) {
+            if (note.getCategory().equalsIgnoreCase("Allowance")) {
                 title.setTextColor(getContext().getResources().getColor(R.color.incomeColor)); // Green for Income
                 content.setTextColor(getContext().getResources().getColor(R.color.incomeColor)); // Green for Income
-            } else if (note.getCategory().equalsIgnoreCase("Expense")) {
+                category.setTextColor(getContext().getResources().getColor(R.color.white)); // Green for Income
+            } else if (note.getCategory().equalsIgnoreCase("Food") ||
+                    (note.getCategory().equalsIgnoreCase("Transport") ||
+                    (note.getCategory().equalsIgnoreCase("Miscellaneous")))) {
                 title.setTextColor(getContext().getResources().getColor(R.color.expenseColor)); // Red for Expense
                 content.setTextColor(getContext().getResources().getColor(R.color.expenseColor)); // Red for Expense
+                category.setTextColor(getContext().getResources().getColor(R.color.white)); // Red for Expense
             }
 
             // Set the image based on the category

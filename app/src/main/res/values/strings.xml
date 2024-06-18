@@ -23,7 +23,10 @@
     <string name="total">₱2,000.00</string>
     <string name="confirm">Enter your PIN again</string>
     <string name="setup">Set up your PIN</string>
-    <string name="category_allowance">\n</string>
+    <string name="category_allowance">Allowance</string>
+    <string name="Food">Food</string>
+    <string name="Transport">Transport</string>
+    <string name="Miscellaneous">Miscellaneous</string>
     <!-- Spinner -->
     <string-array name="income_categories">
         <item>Allowance</item>
