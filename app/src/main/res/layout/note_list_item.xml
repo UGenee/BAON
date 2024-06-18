@@ -37,7 +37,6 @@
             android:layout_height="24dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/red"
             android:layout_alignParentEnd="true"
             android:text="budget"/>
 

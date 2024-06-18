@@ -2,7 +2,9 @@ package com.bonifacio.baon;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
@@ -84,8 +86,8 @@ public class dashboard extends AppCompatActivity {
     }
 
     private void updateDateTextView() {
-        // Format the selected date as "MMMM dd, yyyy"
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
+        // Format the selected date as "MMMM, yyyy"
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, yyyy", Locale.getDefault());
         String dateString = dateFormat.format(selectedDate.getTime());
         dateTextView.setText(dateString);
     }
@@ -174,36 +176,49 @@ public class dashboard extends AppCompatActivity {
                     entryCalendar.get(Calendar.MONTH) == month &&
                     entryCalendar.get(Calendar.YEAR) == year) {
                 try {
-                    double amount = Double.parseDouble(entry.getEntryTitle());
-                    if (entry.getCategory().equalsIgnoreCase(getString(R.string.category_allowance))) {
-                        totalIncome += amount;
+                    String entryTitle = entry.getEntryTitle();
+                    // Check if the entryTitle contains only numeric characters
+                    if (entryTitle.matches("\\d+(\\.\\d+)?")) {
+                        double amount = Double.parseDouble(entryTitle);
+                        if (entry.getCategory().equalsIgnoreCase(getString(R.string.category_allowance))) {
+                            totalIncome += amount;
+                        } else if (entry.getCategory().equalsIgnoreCase(getString(R.string.Food)) ||
+                                entry.getCategory().equalsIgnoreCase(getString(R.string.Transport)) ||
+                                entry.getCategory().equalsIgnoreCase(getString(R.string.Miscellaneous))) {
+                            totalExpenses += amount;
+                        }
                     } else {
-                        totalExpenses += amount;
+                        Log.e("Error", "Invalid amount: " + entryTitle);
                     }
                 } catch (NumberFormatException e) {
-                    e.printStackTrace();
+                    // Handle the exception, e.g., log the error or show a toast
+                    Log.e("Error", "Invalid amount: " + entry.getEntryTitle());
                 }
             }
         }
 
-        String formattedIncome = String.format("₱%.2f", totalIncome);
+        String formattedIncome = String.format("+₱%.2f", totalIncome);
         totalTextView.setText(formattedIncome);
 
-        String formattedExpenses = String.format("₱%.2f", totalExpenses);
+        // Set income color to green if totalIncome >= 0
+        if (totalIncome >= 0) {
+            totalTextView.setTextColor(Color.GREEN);
+            Log.d("TotalIncome", "Total Income: " + totalIncome);
+        } else {
+            totalTextView.setTextColor(getResources().getColor(R.color.expenseColor));
+        }
+
+        String formattedExpenses = String.format("-₱%.2f", totalExpenses);
         expenseTextView.setText(formattedExpenses);
 
         double availableBalance = totalIncome - totalExpenses;
         String formattedBalance = String.format("₱%.2f", availableBalance);
         balanceTextView.setText(formattedBalance);
 
-        if (totalIncome > 0) {
-            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor));
-        } else if (totalExpenses > 0) {
-            totalTextView.setTextColor(getResources().getColor(R.color.expenseColor));
-        } else {
-            totalTextView.setTextColor(getResources().getColor(R.color.incomeColor));
-        }
+        // Set balance text color
+        balanceTextView.setTextColor(getResources().getColor(R.color.white));
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
